@@ -1,38 +1,61 @@
 <template>
-  <div class="iblock mainblock">
-    <h1>{{ msg }}</h1>
-    <div class="iblock">
-      <div class="iblock yellow" >
-      <template v-for="cathash in catshashes">
-        &nbsp;<router-link class="yellow" :to="'/hash/' + cathash.substr(1) + ''" v-bind:key="cathash">{{ cathash }}</router-link>
-      </template>
+  <div >
+    <div class="row countdown-item" style="padding-left: 10px;">
+      <div class="countdown-index-resposive">#200</div>
+      <div class="col-sm-4 col-full-xs">
+          <a class="article_movie_poster" href="https://www.rottentomatoes.com/m/howling/">
+              <div><img class="article_poster"
+                      src="https://resizing.flixster.com/V1vjYurmpZT39MqmB-QHEwjSIh0=/180x240/v1.bTsxMTIwODg5MTtqOzE4MzMwOzIwNDg7MTU2MDsyMDgw"
+                      alt="" sborder="" style="border-color: #EEEEEE; border-style: solid; border-width: 1px;">
+              </div>
+          </a>
       </div>
-      <div class="iblock" v-for="data in vids" v-bind:key="data.url">
-        <h2 class="iblock pink">
-        😈  <a :name="encodeURI(data.url)">{{ data.name !== 'todo add name' ? data.name : data.url.split('.')[0] }}</a>  😈
-        </h2>
-        <div class="iblock">
-          <router-link :to="encodeURI('/vid/' + data.url)">
-          <img :src="encodeURI('../thumbs/' + extension(data.url) + '.jpg')" class="videoblock" height="auto" /></router-link>
-        </div>
-        <h3 class="iblock blue">
-          {{ data.description !== 'todo add description' ? data.description : data.url.split('.')[0] }}
-        </h3>
-        <h4 class="iblock green">
-          <input type="hidden" :v-model="encodeURI('../videos/' + data.url)"/>
-          <router-link  v-clipboard:copy="encodeURI('../videos/' + data.url)" :to="'/vid/' + encodeURI(data.url)">
-            {{ encodeURI('../videos/' + data.url) }}
-          </router-link >
-        </h4>
-        <h4 class="iblock yellow">
-          <template v-for="cat in data.cats.split(' ')" to="/">
-            &nbsp;<router-link class="yellow" :to="'/hash/' + cat.substr(1) + ''" v-bind:key="cat">{{ cat }}</router-link>
-          </template>
-        </h4>
-        <hr class="pink"/>
+      <div class="col-sm-18 col-full-xs countdown-item-content">
+          <div class="row countdown-item-title-bar">
+              <div class="col-sm-20 col-full-xs" style="height: 100%;">
+                  <div class="article_movie_title" style="float: left;">
+                      <div>
+                          <h2><a href="https://www.rottentomatoes.com/m/howling/">The Howling</a> <span
+                                  class="subtle start-year">(1981)</span> <br><span title="Fresh"
+                                  class="icon tiny fresh"></span> <span class="tMeterScore">70%</span>
+                          </h2>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-4 col-full-xs" style="height: 100%;">
+                  <div class="countdown-index">#200</div>
+              </div>
+          </div>
+          <div class="row countdown-item-details">
+              <div class="col-sm-24">
+                  <div class="info countdown-adjusted-score"><span class="descriptor">Adjusted Score:
+                      </span>72.084% <span class="glyphicon glyphicon-question-sign" rel="tooltip"
+                          data-toggle="tooltip" data-placement="top" data-html="true" title=""
+                          data-original-title="The Adjusted Score comes from a weighted formula (Bayesian) that we use that accounts for variation in the number of reviews per movie."></span>
+                  </div>
+                  <div class="info critics-consensus"><span class="descriptor">Critics Consensus:</span>
+                      The Howling packs enough laughs into its lycanthropic carnage to distinguish it from
+                      other werewolf entries, with impressive visual effects adding some bite.</div>
+                  <div class="info synopsis"><span class="descriptor">Synopsis:</span> This
+                      groundbreaking, darkly comic horror film from director Joe Dante changed the look
+                      and feel of werewolf movies in ways...<a class="" target="_top" data-pageheader=""
+                          href="https://www.rottentomatoes.com/m/howling/"> [More]</a></div>
+                  <div class="info cast">
+                      <span class="descriptor">Starring:</span> <a class=""
+                          href="https://www.rottentomatoes.com/celebrity/dee_wallace/">Dee Wallace</a>, <a
+                          class="" href="https://www.rottentomatoes.com/celebrity/patrick_macnee/">Patrick
+                          Macnee</a>, <a class=""
+                          href="https://www.rottentomatoes.com/celebrity/dennis_dugan/">Dennis Dugan</a>,
+                      <a class="" href="https://www.rottentomatoes.com/celebrity/chris_stone/">Christopher
+                          Stone</a></div>
+                  <div class="info director">
+                      <span class="descriptor">Directed By:</span> <a class=""
+                          href="https://www.rottentomatoes.com/celebrity/joe_dante/">Joe Dante</a></div>
+              </div>
+          </div>
       </div>
-    </div>
-    <img class="flip" width="320" height="auto" src="../assets/star.gif">
+    </div><br>
+    <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
   </div>
 </template>
 
