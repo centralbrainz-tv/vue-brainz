@@ -42,7 +42,7 @@
               <div class="col-sm-8 col-full-xs" style="height: 100%;">
                   <div class="article_movie_title" style="float: left;">
                       <div>
-                          <starsRating v-bind="movie.config"></starsRating>
+                          <stars-rating :config="movie.config"></stars-rating>
                       </div>
                   </div>
               </div>
@@ -85,7 +85,6 @@ import json from '../json/movies.json'
 import demonsJson from '../json/demons.json'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
-import starsRating from './components/rating-stars'
 
 Vue.use(VueClipboard)
 export default {
