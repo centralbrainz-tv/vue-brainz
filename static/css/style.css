@@ -209,7 +209,7 @@ html {
 
 body {
   line-height: 1.7;
-  color: #a0b4d6 !important;
+  color: wheat !important;
   font-weight: 300;
   font-size: 1rem;
   background: black;
@@ -224,11 +224,13 @@ body {
   color: #fff; }
 
 a {
+  color: red!important;
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
   text-decoration: none; }
   a:hover {
+    color: deeppink!important;
     text-decoration: none; }
 
 h1, h2, h3, h4, h5,

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Vids from '@/components/Vids'
-import VidsWithHashes from '@/components/VidsWithHashes'
-import VidsWithUrl from '@/components/VidsWithUrl'
+import Movies from '@/components/Movies'
+import Movie from '@/components/Movie'
+import Genre from '@/components/Genre'
+
 Vue.use(Router)
 
 export default new Router({
@@ -10,17 +11,17 @@ export default new Router({
     {
       path: '/',
       name: 'Main',
-      component: Vids
+      component: Movies
     },
     {
-      path: '/hash/:hash',
-      component: VidsWithHashes,
-      name: 'hashes'
+      path: '/movie/:name',
+      name: 'Movie',
+      component: Movie
     },
     {
-      path: '/vid/:uri',
-      component: VidsWithUrl,
-      name: 'vids'
+      path: '/genre/:genre',
+      name: 'Movie',
+      component: Genre
     }
   ]
 })

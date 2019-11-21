@@ -1,6 +1,8 @@
 <template xmlns:v="http://www.w3.org/1999/xhtml">
   <div id="app">
-    <img width="320" height="auto" src="./assets/star.gif" />
+    <h1 class="rot">CENTRAL BRAIN Z</h1>
+    <h2 class="white">Horror Movie Database</h2>
+    <img width="320" height="auto" src="/static/centralbrainz.png" />
     <br>
     <hr class="red"/>
     <div class="links">
@@ -55,7 +57,7 @@
   </div>
 </template>
 <script>
-import json from './json/vids.json'
+import json from './json/movies.json'
 
 export default {
   name: 'App',
@@ -86,7 +88,6 @@ export default {
       if (this.query.length < 3) {
         return
       }
-      console.log(this.query)
       let results = []
       json.forEach(element => {
         let str, n
@@ -97,18 +98,21 @@ export default {
           img_url: '',
           description: ''
         }
-        str = element.description
+        // str = element.rottenTomato.info
+        str = element.name
         n = str.toLowerCase().indexOf(this.query)
+        /*
         if (n === -1) {
-          str = element.cats
+          str = element.rottenTomato.criticConsensus
           n = str.toLowerCase().indexOf(this.query)
         }
+        */
         if (n >= 0) {
-          result.keywords = element.cats
+          result.keywords = element.rottenTomato.genre
           result.name = element.name
-          result.description = element.description
-          result.url = encodeURI('/vid/' + element.url)
-          result.img_url = encodeURI('/thumbs/' + this.extension(element.url) + '.jpg')
+          result.description = element.rottenTomato.criticConsensus
+          result.url = encodeURI('/movie/' + element.name)
+          result.img_url = element.rottenTomato.imgUrl
           results.push(result)
         }
       })
@@ -121,7 +125,7 @@ export default {
 <style>
 body {
   background-color: black!important;
-  color: white;
+  color: white!important;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -141,6 +145,10 @@ body {
 }
 .rot {
   color: red;
+  word-wrap: break-word;
+}
+.white {
+  color: white;
   word-wrap: break-word;
 }
 .pink {
@@ -214,6 +222,9 @@ body {
 .input-group {
   max-width: 640px;
   margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px!important;
+  margin: 0 auto;
 }
 .thumb {
   width: 160px;
@@ -227,7 +238,7 @@ body {
 }
 .values {
   display: flex;
-  margin-left: 100px;
+  margin-left: 10px;
   padding-bottom: 10px;
   padding-top: 5px;
   text-align: center;
