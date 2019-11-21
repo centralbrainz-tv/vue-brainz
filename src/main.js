@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import StarRating from 'vue-dynamic-star-rating'
+import StarRating from 'vue-star-rating'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 Vue.config.productionTip = false
 Vue.component('star-rating', StarRating)

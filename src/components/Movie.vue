@@ -38,6 +38,15 @@
                   </div>
               </div>
           </div>
+          <div class="row row-sub countdown-item-title-bar">
+              <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                  <div class="article_movie_title" style="float: left;">
+                      <div>
+                          <star-rating inactive-color="white" active-color="red" :increment="0.01" :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1" border-color="red" :read-only="true"></star-rating>
+                      </div>
+                  </div>
+              </div>
+          </div>
           <div class="row row-sub countdown-item-details">
               <div class="col-sm-8">
                 <span class="red">Critic Consensus: </span>

@@ -53,6 +53,8 @@
     </div>
     <br/>
     <hr class="red"/>
+    <star-rating  v-model="boundRating" @rating-selected="setRating" inactive-color="white" active-color="red" :increment="0.01" :rating="6.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1" border-color="red"></star-rating>
+    <hr class="red"/>
     <router-view />
   </div>
 </template>
@@ -63,11 +65,16 @@ export default {
   name: 'App',
   data () {
     return {
+      boundRating: 3,
       query: '',
       data: []
     }
   },
   methods: {
+    setRating: function (rating) {
+      console.log(rating)
+      this.$router.push('/rating/' + rating)
+    },
     clearData () {
       this.data = []
     },
@@ -248,5 +255,8 @@ body {
 }
 .div-value {
   text-align: left;
+}
+.vue-star-rating {
+  margin: 0 auto;
 }
 </style>
