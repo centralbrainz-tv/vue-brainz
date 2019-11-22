@@ -1,83 +1,100 @@
 <template>
-  <div class="white left-align data" v-if="videos && videos.length > 0">
-    <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item" style="padding-left: 10px; width: 100%;">
-      <div class="col-sm-3 col-full-xs img-thumb">
-           <router-link :to="movie.rottenTomato.imgUrl" class="article_movie_poster">
-              <div><img class="article_poster"
-                      :src="movie.rottenTomato.imgUrl"
-                      alt="" sborder="" style="border-color: #EEEEEE; border-style: solid; border-width: 1px;">
-              </div>
-          </router-link>
-      </div>
-      <div class="col-sm-8 col-full-xs countdown-item-content">
-          <div class="row row-sub countdown-item-title-bar">
-              <div class="col-sm-8 col-full-xs" style="height: 100%;">
-                  <div class="article_movie_title" style="float: left;">
-                      <div>
-                          <h2><router-link :to="'/movie/' + movie.name"  class="red">{{ movie.name }}</router-link></h2> <br/>
-                          <span class="red">Tomato Meter: </span><h5 class="white">{{ movie.rottenTomato.tomatoMeter.score }}% / {{ movie.rottenTomato.tomatoMeter.count }} total</h5>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="row row-sub countdown-item-title-bar">
-              <div class="col-sm-8 col-full-xs" style="height: 100%;">
-                  <div class="article_movie_title" style="float: left;">
-                      <div>
-                          <span class="red">Audience Score: </span><h5 class="white">{{ movie.rottenTomato.audienceScore.score }}% / {{ movie.rottenTomato.audienceScore.count }} ratings</h5>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="row row-sub countdown-item-title-bar">
-              <div class="col-sm-8 col-full-xs" style="height: 100%;">
-                  <div class="article_movie_title" style="float: left;">
-                      <div>
-                          <span class="red">IMDB Rating: </span><h5 class="white"><a class="white" :href="movie.imdb.url + movie.imdb.ratingUrl">{{ movie.imdb.rating }}</a> / {{ movie.imdb.count }} total</h5>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="row row-sub countdown-item-title-bar">
-              <div class="col-sm-8 col-full-xs" style="height: 100%;">
-                  <div class="article_movie_title" style="float: left;">
-                      <div>
-                          <star-rating inactive-color="white" active-color="red" :increment="0.01" :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1" border-color="red" :read-only="true"></star-rating>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="row row-sub countdown-item-details">
-              <div class="col-sm-8">
-                <span class="red">Critic Consensus: </span>
-                  {{ movie.rottenTomato.criticConsensus }}
-              </div>
-          </div>
-          <div class="row row-sub countdown-item-details">
-              <div class="col-sm-8">
-                <span class="red">Short info: </span>
-                  {{ movie.imdb.info }}
-              </div>
-          </div>
-          <div class="row row-sub countdown-item-details">
-              <div class="col-sm-8 small-font">
-                <span class="red">Genre: </span>
-                <template v-for="cathash in catshashes(movie.name)">
-                  &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">#{{ cathash }}</router-link>
-                </template>
-              </div>
-          </div>
-      </div>
-      <hr class="red"/>
-      <div class="brain-container" v-if="demon = calcDemon()">
-        <img :src="demon.url" class="demon" :alt="demon.alt" :title="demon.alt" width="160" height="auto" />
-      </div>
-    </div><br>
-    <hr class="red"/>
-    <div class="brain-container">
-      <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
+    <div class="mainblock">
+        <h1 class="red">{{ msg }}</h1>
+        <div class="white left-align data" v-if="videos && videos.length > 0">
+            <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
+                style="padding-left: 10px; width: 100%;">
+                <div class="col-sm-3 col-full-xs img-thumb">
+                    <router-link :to="movie.rottenTomato.imgUrl" class="article_movie_poster">
+                        <div><img class="article_poster" :src="movie.rottenTomato.imgUrl" alt="" sborder=""
+                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px;">
+                        </div>
+                    </router-link>
+                </div>
+                <div class="col-sm-8 col-full-xs countdown-item-content">
+                    <div class="row row-sub countdown-item-title-bar">
+                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                            <div class="article_movie_title" style="float: left;">
+                                <div>
+                                    <h2>
+                                        <router-link :to="'/movie/' + movie.name" class="red">{{ movie.name }}
+                                        </router-link>
+                                    </h2> <br />
+                                    <span class="red">Tomato Meter: </span>
+                                    <h5 class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
+                                        {{ movie.rottenTomato.tomatoMeter.count }} total</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-sub countdown-item-title-bar">
+                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                            <div class="article_movie_title" style="float: left;">
+                                <div>
+                                    <span class="red">Audience Score: </span>
+                                    <h5 class="white">{{ movie.rottenTomato.audienceScore.score }}% /
+                                        {{ movie.rottenTomato.audienceScore.count }} ratings</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-sub countdown-item-title-bar">
+                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                            <div class="article_movie_title" style="float: left;">
+                                <div>
+                                    <span class="red">IMDB Rating: </span>
+                                    <h5 class="white"><a class="white"
+                                            :href="movie.imdb.url + movie.imdb.ratingUrl">{{ movie.imdb.rating }}</a> /
+                                        {{ movie.imdb.count }} total</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-sub countdown-item-title-bar">
+                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                            <div class="article_movie_title" style="float: left;">
+                                <div>
+                                    <star-rating inactive-color="white" active-color="red" :increment="0.01"
+                                        :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0"
+                                        :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
+                                        border-color="red" :read-only="true"></star-rating>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-sub countdown-item-details">
+                        <div class="col-sm-8">
+                            <span class="red">Critic Consensus: </span>
+                            {{ movie.rottenTomato.criticConsensus }}
+                        </div>
+                    </div>
+                    <div class="row row-sub countdown-item-details">
+                        <div class="col-sm-8">
+                            <span class="red">Short info: </span>
+                            {{ movie.imdb.info }}
+                        </div>
+                    </div>
+                    <div class="row row-sub countdown-item-details">
+                        <div class="col-sm-8 small-font">
+                            <span class="red">Genre: </span>
+                            <template v-for="cathash in catshashes(movie.name)">
+                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
+                                    #{{ cathash }}</router-link>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <hr class="red" />
+                <div class="brain-container" v-if="demon = calcDemon()">
+                    <img :src="demon.url" class="demon" :alt="demon.alt" :title="demon.alt" width="160" height="auto" />
+                </div>
+            </div><br>
+            <hr class="red" />
+            <div class="brain-container">
+                <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -99,8 +116,8 @@ export default {
   },
   data () {
     return {
-      movies: this.jsonWithUrl(json),
-      demons: demonsJson
+      demons: demonsJson,
+      msg: "Filtered by Genre: " + this.$route.params.genre
     }
   },
   methods: {

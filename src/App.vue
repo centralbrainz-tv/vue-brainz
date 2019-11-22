@@ -1,62 +1,63 @@
 <template xmlns:v="http://www.w3.org/1999/xhtml">
-  <div id="app">
-    <h1 class="rot">CENTRAL BRAIN Z</h1>
-    <h2 class="white">Horror Movie Database</h2>
-    <img width="320" height="auto" src="/static/centralbrainz.png" />
-    <br>
-    <hr class="red"/>
-    <div class="links">
-      &bull; <a class="link" href="http://lariushin.org/">lariushin.org</a>
-      &bull; <a class="link" href="http://lariushin.top/">lariushin.top</a>
-      &bull; <a class="link" href="http://herbarium.info/">herbarium.info</a>
-      &bull; <br/>&bull; <a class="link" href="http://fungarium.info/">fungarium.info</a>
-      &bull; <a class="link" href="http://lichenarium.info/">lichenarium.info</a>
-      &bull; <a class="link" href="http://plantarium.info/">plantarium.info</a>
-      &bull; <br/>&bull; <a class="link" href="http://algaerium.info/">algaerium.info</a>
-      &bull; <a class="link" href="http://lariushin.com/">lariushin.com</a>
-      &bull; <a class="link" href="http://nightshade.blog/">nightshade.blog</a>
-      &bull; <br/>&bull; <a class="link" href="http://bettycat.vip/">bettycat.vip</a>
-      &bull; <a class="link" href="http://www.bibliothecium.info/">bibliothecium.info</a>
-      &bull; <a class="link" href="https://antropology.tv/#/">antropology.tv</a>
-      &bull; <br/>&bull; <a class="link" href="http://xn--land-saar-z7a.cc/">öland-saar.cc</a>
-      &bull; <a class="link" href="http://iceland-trip.cc/">iceland-trip.cc</a>
-      &bull; <a class="link" href="http://centralbrainz.tv/">centralbrainz.tv</a>
-      &bull; <br/>&bull; <a class="link" href="http://travel-pics.vip/">travel-pics.vip</a>
-      &bull; <a class="link" href="http://necronomicon.vip/">necronomicon.vip</a>
-      &bull; <a class="link" href="http://asmodeus.vip/">asmodeus.vip</a> &bull;
-    </div>
-    <hr class="red"/>
-    <br>
-    <div class="input-group input-group-lg bottom">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Search</span>
-      </div>
-      <input type="text"
-        class="form-control"
-        @keyup.prevent="search"
-        v-model="query" />
-    </div>
-    <div v-if="data && data.length > 0" class="data">
-      <br/>
-      <hr class="red"/>
-      <br/>
-      <div v-for="(value, index) in data"
-      :key="index"
-      :ref="`card_${index}`" class="values">
-        <div class="div-img"><a :href="value.img_url" target="_blank"><img :src="value.img_url" class="thumb"/></a></div>
-        <div class="div-value">
-          <h5><router-link class="rot" @click="clearData" :to="value.url">{{value.name}}</router-link></h5>
-          <h6 class="blue">{{value.description}}</h6>
-          <span class="yellow">{{value.keywords}}</span>
+    <div id="app">
+        <h1 class="rot">CENTRAL BRAIN Z</h1>
+        <h2 class="white">Horror Movie Database</h2>
+        <img width="320" height="auto" src="/static/centralbrainz.png" />
+        <br>
+        <hr class="red" />
+        <div class="links">
+            &bull; <a class="link" href="http://lariushin.org/">lariushin.org</a>
+            &bull; <a class="link" href="http://lariushin.top/">lariushin.top</a>
+            &bull; <a class="link" href="http://herbarium.info/">herbarium.info</a>
+            &bull; <br />&bull; <a class="link" href="http://fungarium.info/">fungarium.info</a>
+            &bull; <a class="link" href="http://lichenarium.info/">lichenarium.info</a>
+            &bull; <a class="link" href="http://plantarium.info/">plantarium.info</a>
+            &bull; <br />&bull; <a class="link" href="http://algaerium.info/">algaerium.info</a>
+            &bull; <a class="link" href="http://lariushin.com/">lariushin.com</a>
+            &bull; <a class="link" href="http://nightshade.blog/">nightshade.blog</a>
+            &bull; <br />&bull; <a class="link" href="http://bettycat.vip/">bettycat.vip</a>
+            &bull; <a class="link" href="http://www.bibliothecium.info/">bibliothecium.info</a>
+            &bull; <a class="link" href="https://antropology.tv/#/">antropology.tv</a>
+            &bull; <br />&bull; <a class="link" href="http://xn--land-saar-z7a.cc/">öland-saar.cc</a>
+            &bull; <a class="link" href="http://iceland-trip.cc/">iceland-trip.cc</a>
+            &bull; <a class="link" href="http://centralbrainz.tv/">centralbrainz.tv</a>
+            &bull; <br />&bull; <a class="link" href="http://travel-pics.vip/">travel-pics.vip</a>
+            &bull; <a class="link" href="http://necronomicon.vip/">necronomicon.vip</a>
+            &bull; <a class="link" href="http://asmodeus.vip/">asmodeus.vip</a> &bull;
         </div>
-      </div>
+        <hr class="red" />
+        <br>
+        <div class="input-group input-group-lg bottom">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Search</span>
+            </div>
+            <input type="text" class="form-control" @keyup.prevent="search" v-model="query" />
+        </div>
+        <div v-if="data && data.length > 0" class="data">
+            <br />
+            <hr class="red" />
+            <br />
+            <div v-for="(value, index) in data" :key="index" :ref="`card_${index}`" class="values">
+                <div class="div-img"><a :href="value.img_url" target="_blank"><img :src="value.img_url"
+                            class="thumb" /></a></div>
+                <div class="div-value">
+                    <h5><a href="#" class="rot" @click="clearData(value.url)">{{value.name}}</a></h5>
+                    <h6 class="blue">{{value.description}}</h6>
+                    <template v-for="cathash in catshashes(value.keywords)">
+                        &nbsp; <a href="#" class="yellow" @click="clearData('/hash/' + cathash.substr(1) + '')"
+                            v-bind:key="cathash">{{ cathash }}</a>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr class="red" />
+        <star-rating v-model="boundRating" @rating-selected="setRating" inactive-color="white" active-color="red"
+            :increment="0.01" :rating="6.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
+            border-color="red"></star-rating>
+        <hr class="red" />
+        <router-view />
     </div>
-    <br/>
-    <hr class="red"/>
-    <star-rating  v-model="boundRating" @rating-selected="setRating" inactive-color="white" active-color="red" :increment="0.01" :rating="6.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1" border-color="red"></star-rating>
-    <hr class="red"/>
-    <router-view />
-  </div>
 </template>
 <script>
 import json from './json/movies.json'
@@ -75,8 +76,17 @@ export default {
       console.log(rating)
       this.$router.push('/rating/' + rating)
     },
-    clearData () {
+    clearData (url) {
+      this.$router.push(url)
       this.data = []
+      this.query = ''
+    },
+    catshashes (cats) {
+      let array = []
+      cats.split(', ').forEach(cat => {
+        array.push(cat)
+      })
+      return array.filter((item, index) => array.indexOf(item) === index)
     },
     extension (url) {
       console.log(url)
