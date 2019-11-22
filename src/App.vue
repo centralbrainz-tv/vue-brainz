@@ -53,7 +53,7 @@
         <br />
         <hr class="red hr800" />
         <star-rating v-model="boundRating" @rating-selected="setRating" inactive-color="white" active-color="red"
-            :increment="0.01" :rating="6.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
+            :rating="6" :max-rating="10" :star-size="30" :border-width="1"
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <router-view />
@@ -323,5 +323,54 @@ body {
   max-width: 240px!important;
   padding-right: unset!important;
   padding-left: unset!important;
+}
+.vue-star-rating-pointer {
+  transform: rotate(180deg);
+}
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: lawngreen;
+  word-wrap: break-word
+}
+.pink {
+  color: deeppink;
+  word-wrap: break-word;
+}
+.white {
+  color: white;
+  word-wrap: break-word;
+}
+.left-align {
+  text-align: left;
+}
+.red {
+  color: red;
+  word-wrap: break-word;
+}
+.yellow {
+  color: yellow;
+  word-wrap: break-word;
+}
+.green {
+  color: lawngreen;
+  word-wrap: break-word;
+}
+.blue {
+ color: dodgerblue;
+ word-wrap: break-word;
+}
+.mainblock {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 </style>

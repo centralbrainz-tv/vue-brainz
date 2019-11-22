@@ -1,6 +1,6 @@
 <template>
     <div class="mainblock">
-        <h1 class="red">{{ msg }}</h1>
+        <h1 class="red">{{ message }}</h1>
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
@@ -54,9 +54,10 @@
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
+                                    <span class="red">Aggregate median rating: </span>
                                     <star-rating inactive-color="white" active-color="red" :increment="0.01"
                                         :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0"
-                                        :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
+                                        :fixed-points="2" :max-rating="10" :star-size="20" :border-width="1"
                                         border-color="red" :read-only="true"></star-rating>
                                 </div>
                             </div>
@@ -155,6 +156,9 @@ export default {
   computed: {
     videos () {
       return this.movies
+    },
+    message () {
+      return this.msg
     }
   },
   mounted: function () {
@@ -164,50 +168,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: lawngreen;
-  word-wrap: break-word
-}
-.pink {
-  color: deeppink;
-  word-wrap: break-word;
-}
-.white {
-  color: white;
-  word-wrap: break-word;
-}
-.left-align {
-  text-align: left;
-}
-.red {
-  color: red;
-  word-wrap: break-word;
-}
-.yellow {
-  color: yellow;
-  word-wrap: break-word;
-}
-.green {
-  color: lawngreen;
-  word-wrap: break-word;
-}
-.blue {
- color: dodgerblue;
- word-wrap: break-word;
-}
-.mainblock {
-  max-width: 1280px;
-  margin: 0 auto;
-}
 </style>

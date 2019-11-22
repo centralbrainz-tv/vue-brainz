@@ -1,6 +1,6 @@
 <template>
     <div class="mainblock">
-        <h1 class="red">{{ msg }}</h1>
+        <h1 class="red">{{ message }}</h1>
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
@@ -11,9 +11,9 @@
                         </div>
                     </router-link>
                 </div>
-                <div class="col-sm-8 col-full-xs countdown-item-content">
+                <div class="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Audience Score: </span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
@@ -51,43 +51,44 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
+                                    <span class="red">Aggregate median rating: </span>
                                     <star-rating inactive-color="white" active-color="red" :increment="0.01"
                                         :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0"
-                                        :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
+                                        :fixed-points="2" :max-rating="10" :star-size="20" :border-width="1"
                                         border-color="red" :read-only="true"></star-rating>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Critic Consensus: </span>
                             {{ movie.rottenTomato.criticConsensus }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Info: </span>
                             {{ movie.rottenTomato.info }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Short info: </span>
                             {{ movie.imdb.info }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Storyline: </span>
                             {{ movie.imdb.storyline }}
                         </div>
                     </div>
                     <div class="row countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
                                 &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
@@ -96,55 +97,55 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Rating: </span>
                             {{ movie.rottenTomato.rating }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Genre: </span>
                             {{ movie.rottenTomato.genre }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Directed by: </span>
                             {{ movie.rottenTomato.directedBy }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Written by: </span>
                             {{ movie.rottenTomato.writtenBy }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Release date: </span>
                             {{ movie.rottenTomato.inTheaters }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">On disc: </span>
                             {{ movie.rottenTomato.onDisc }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Run time: </span>
                             {{ movie.rottenTomato.runtime }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Studio: </span>
                             {{ movie.rottenTomato.studio }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Additional information: </span><br />
                             <div class="small-font">
                                 <a :href="movie.imdb.url + movie.imdb.certificationsUrl" class="green">Parental
@@ -179,6 +180,27 @@
                 <div class="brain-container" v-if="demon = calcDemon()">
                     <img :src="demon.url" class="demon" :alt="demon.alt" :title="demon.alt" width="160" height="auto" />
                 </div>
+                <div id="disqus_thread"></div>
+                <script>
+
+                    /**
+                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://centralbrainz.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                        powered by Disqus.</a></noscript>
             </div><br>
             <hr class="red hr800" />
             <div class="brain-container">
