@@ -210,40 +210,4 @@ a {
   max-width: 1280px;
   margin: 0 auto;
 }
-.videoblock {
-  max-width: 640px;
-  width: 100%;
-  min-width: 320px;
-}
-.flip {
-  -webkit-transform: scale(-1, -1);
-  transform: scale(-1, -1);
-}
-.small-font {
-  font-size: 10pt;
-  flex: 0 0 100%;
-  max-width: 100%;
-}
-.brain-container {
-  text-align: center;
-  max-width: 0 auto;
-}
-.row {
-  padding-top: 10px;
-  padding-bottom: 20px;
-  flex-wrap: unset;
-}
-.row-sub {
-  padding-top: 2px;
-  padding-bottom: 5px;
-}
-.data {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-}
-.countdown-item-content {
-  flex: 0 0 100%;
-  max-width: 1024px;
-}
 </style>
