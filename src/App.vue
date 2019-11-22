@@ -373,4 +373,11 @@ a {
   max-width: 1280px;
   margin: 0 auto;
 }
+.vue-star-rating-rating-text {
+  font-size: 26pt;
+  color: red;
+  bottom: 6px;
+  right: -10px;
+  position: relative;
+}
 </style>

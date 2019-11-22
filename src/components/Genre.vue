@@ -117,7 +117,7 @@ export default {
   },
   data () {
     return {
-      demons: demonsJson,
+      demons: demonsJson
     }
   },
   methods: {

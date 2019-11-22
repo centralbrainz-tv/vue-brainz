@@ -125,11 +125,11 @@ export default {
     jsonWithUrl (json) {
       let jsonOut = []
       json.forEach(item => {
-        const r1 = item.rottenTomato.tomatoMeter.score / 10.0
-        const r2 = item.rottenTomato.audienceScore.score / 10
-        const r3 = item.imdb.rating
-        const r = this.$route.params.rating
-        if (r < r1 || r < r2 || r < r3) {
+        const r1 = Math.round(item.rottenTomato.tomatoMeter.score / 10.0)
+        const r2 = Math.round(item.rottenTomato.audienceScore.score / 10)
+        const r3 = Math.round(item.imdb.rating)
+        const r = Math.round(this.$route.params.rating)
+        if (r === r1 || r === r2 || r === r3) {
           jsonOut.push(item)
         }
       })
@@ -170,8 +170,8 @@ export default {
       return this.jsonWithUrl(json)
     },
     message () {
-      return 'Filtered by Rating: ' + this.$route.params.rating
-    },
+      return this.$route.params.rating + ' stars movies hits: '
+    }
   },
   mounted: function () {
   }
