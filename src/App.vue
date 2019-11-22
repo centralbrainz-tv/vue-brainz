@@ -44,7 +44,7 @@
                     <h5><a href="#" class="rot" @click="clearData(value.url)">{{value.name}}</a></h5>
                     <h6 class="blue">{{value.description}}</h6>
                     <template v-for="cathash in catshashes(value.keywords)">
-                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash.substr(1) + '')"
+                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash)"
                             v-bind:key="cathash">{{ cathash }}</a>
                     </template>
                 </div>
@@ -301,7 +301,9 @@ body {
 .row {
   padding-top: 10px;
   padding-bottom: 20px;
-  flex-wrap: unset;
+  flex-wrap: unset!important;
+  margin: auto!important;
+  padding-right: 20px;
 }
 .row-sub {
   padding-top: 2px;
@@ -319,5 +321,7 @@ body {
 .col-sm-3 {
   flex: unset!important;
   max-width: 240px!important;
+  padding-right: unset!important;
+  padding-left: unset!important;
 }
 </style>
