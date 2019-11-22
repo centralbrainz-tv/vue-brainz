@@ -52,16 +52,6 @@
     },
     {
         "name": "Motel Hell (1980)",
-        "config": {
-            "rating": 4.7,
-            "isIndicatorActive": true,
-            "starStyle": {
-                "fullStarColor": "#ed8a19",
-                "emptyStarColor": "#737373",
-                "starWidth": 100,
-                "starHeight": 100
-            }
-        },
         "rottenTomato": {
             "criticConsensus": "Eerie and satirical, Motel Hell has no vacancy when it comes to low-brow horror gags.",
             "tomatoMeter": {
@@ -93,6 +83,59 @@
             "info": "A seemingly friendly farmer and his sister kidnap unsuspecting travelers and bury them alive, using them to create the \"special meat\" they are famous for.",
             "storyline": "Farmer Vincent kidnaps unsuspecting travellers and is burying them in his garden. Unfortunately for his victims, they are not dead. He feeds his victims to prepare them for his roadside stand. His motto is: It takes all kinds of critters...to make Farmer Vincents fritters. The movie is gory, but is also a parody of slasher movies like Last House on the Left. Written by Scott Lane <rslane@ix.netcom.com>",
             "fullCastUrl": "https://www.imdb.com/title/tt0082533/fullcredits#cast",
+            "genre": "Horror",
+            "certificationsUrl": "/parentalguide#certification",
+            "taglinesUrl": "/taglines",
+            "filmingLocationsUrl": "/locations",
+            "releaseInfoUrl": "/releaseinfo",
+            "technicalSpecsUrl": "/technical",
+            "soundTracksUrl": "/soundtrack",
+            "triviaUrl": "/trivia",
+            "goofsUrl": "/goofs/?tab=gf",
+            "quotesUrl": "/quotes/?tab=qt",
+            "crazyCreditsUrl": "/crazycredits/?tab=cz",
+            "alternateVersionsUrl": "/alternateversions?tab=cz",
+            "connectionsUrl": "/movieconnections/?tab=mc",
+            "faqUrl": "/faq",
+            "awardsUrl": "/awards"
+        },
+        "kinoPoisk": {}
+    },
+    {
+        "name": "Christine (1983)",
+        "rottenTomato": {
+            "criticConsensus": "The cracks are starting to show in John Carpenter's directorial instincts, but Christine is nonetheless silly, zippy fun.",
+            "tomatoMeter": {
+                "score": 71,
+                "count": 28
+            },
+            "audienceScore": {
+                "score": 63,
+                "count": 64503
+            },
+            "imgUrl": "https://resizing.flixster.com/w7W9NMHImyfRXHZG3MpKaH1vua4=/fit-in/200x296.2962962962963/v1.bTsxMTYxNDk1MjtqOzE4MzE0OzEyMDA7NzI5Ozk3Mg",
+            "url": "https://www.rottentomatoes.com/m/christine/",
+            "info": "She was born in Detroit... on an automobile assembly line. But she is no ordinary automobile. Deep within her chassis lives an unholy presence. She is Christine - a red and white 1958 Plymouth Fury whose unique standard equipment includes an evil, indestructible vengeance that will destroy anyone in her way. She seduces 17-year-old Arnie Cunningham (KEITH GORDON), who becomes consumed with passion for her sleek, rounded, chrome-laden body. She demands his complete and unquestioned devotion and when outsiders seek to interfere, they become the victims of Christine's horrifying wrath.",
+            "rating": "R",
+            "genre": "Horror, Mystery, Suspense",
+            "directedBy": "John Carpenter",
+            "writtenBy": "John Carpenter, Bill Phillips, Stephen King",
+            "inTheaters": "Jun 1, 1983  Wide",
+            "onDisc": "Sep 28, 2004",
+            "runtime": "105 minutes",
+            "studio": "Sony Pictures Home Entertainment"
+        },
+        "imdb": {
+            "id": "tt0081184",
+            "rating": 6.7,
+            "count": 65802,
+            "ratingUrl": "/ratings",
+            "url": "https://www.imdb.com/title/tt0085333/",
+            "info": "A nerdish boy buys a strange car with an evil mind of its own and his nature starts to change to reflect it.",
+            "storyline": "In 1957, in Detroit, a red Plymouth Fury is built and is the cause of two accidents, one of them fatal, still in the assembly line. Twenty-one years later, the outcast and bullied nerd Arnold \"Arnie\" Cunningham is getting a ride with his best and only friend Dennis Guilder and he sees the wrecked car for sale in a garden. Arnie immediately falls in love with the car. The car was given the name Christine by its first owner. He brings the car to a repair shop of the despicable Will Darnell and works hard to restore the classic car. While he works in the restoration, he changes his personality to a cocky teenager and he dates the most beautiful girl in the high-school, Leigh Cabot. Soon Arnie becomes selfish and jealous of the supernatural Christine that kills everyone that is a threat to them. Written by Mitchell McCreath.",
+            "fullCastUrl": "f/ullcredits#cast",
+            "plotSummaryUrl": "/plotsummary",
+            "synopsisUrl": "/plotsummary#synopsis",
             "genre": "Horror",
             "certificationsUrl": "/parentalguide#certification",
             "taglinesUrl": "/taglines",
