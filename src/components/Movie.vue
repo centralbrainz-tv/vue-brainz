@@ -347,17 +347,5 @@ a {
   flex: 0 0 100%;
   max-width: 1024px;
 }
-.img-thumb {
-  max-width: 240px;
-  width: 100%;
-}
-.demon {
-  float: right;
-  position: relative;
-  display: none;
-}
-.col-78 {
-  flex: 0 0 78%!important;
-  max-width: 78%!important;
-}
+
 </style>

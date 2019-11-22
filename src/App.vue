@@ -271,4 +271,18 @@ body {
 .vue-star-rating {
   margin: 0 auto;
 }
+.img-thumb {
+  max-width: 240px!important;
+  width: 100%!important;
+  margin: 20px!important;
+}
+.demon {
+  float: right;
+  position: relative;
+  display: none;
+}
+.col-78 {
+  flex: unset!important;
+  max-width: unset!important;
+}
 </style>
