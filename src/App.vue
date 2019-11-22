@@ -44,7 +44,7 @@
                     <h5><a href="#" class="rot" @click="clearData(value.url)">{{value.name}}</a></h5>
                     <h6 class="blue">{{value.description}}</h6>
                     <template v-for="cathash in catshashes(value.keywords)">
-                        &nbsp; <a href="#" class="yellow" @click="clearData('/hash/' + cathash.substr(1) + '')"
+                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash.substr(1) + '')"
                             v-bind:key="cathash">{{ cathash }}</a>
                     </template>
                 </div>
@@ -73,7 +73,6 @@ export default {
   },
   methods: {
     setRating: function (rating) {
-      console.log(rating)
       this.$router.push('/rating/' + rating)
     },
     clearData (url) {
@@ -89,7 +88,6 @@ export default {
       return array.filter((item, index) => array.indexOf(item) === index)
     },
     extension (url) {
-      console.log(url)
       // Remove everything to the last slash in URL
       url = url.substr(1 + url.lastIndexOf('/'))
       // Break URL at ? and take first part (file name, extension)

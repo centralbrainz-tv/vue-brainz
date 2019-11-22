@@ -11,9 +11,9 @@
                         </div>
                     </router-link>
                 </div>
-                <div class="col-sm-8 col-full-xs countdown-item-content">
+                <div class="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Audience Score: </span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <star-rating inactive-color="white" active-color="red" :increment="0.01"
@@ -69,25 +69,25 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Info: </span>
                             {{ movie.rottenTomato.info }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Short info: </span>
                             {{ movie.imdb.info }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Storyline: </span>
                             {{ movie.imdb.storyline }}
                         </div>
                     </div>
                     <div class="row countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
                                 &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
@@ -96,49 +96,49 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Rating: </span>
                             {{ movie.rottenTomato.rating }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Genre: </span>
                             {{ movie.rottenTomato.genre }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Directed by: </span>
                             {{ movie.rottenTomato.directedBy }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Written by: </span>
                             {{ movie.rottenTomato.writtenBy }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Release date: </span>
                             {{ movie.rottenTomato.inTheaters }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">On disc: </span>
                             {{ movie.rottenTomato.onDisc }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Run time: </span>
                             {{ movie.rottenTomato.runtime }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Studio: </span>
                             {{ movie.rottenTomato.studio }}
                         </div>
@@ -237,7 +237,6 @@ export default {
       return array.filter((item, index) => array.indexOf(item) === index)
     },
     extension (url) {
-      console.log(url)
       // Remove everything to the last slash in URL
       url = url.substr(1 + url.lastIndexOf('/'))
       // Break URL at ? and take first part (file name, extension)
@@ -309,7 +308,7 @@ a {
  word-wrap: break-word;
 }
 .mainblock {
-  max-width: 800px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 .videoblock {
@@ -355,5 +354,9 @@ a {
   float: right;
   position: relative;
   display: none;
+}
+.col-78 {
+  flex: 0 0 78%!important;
+  max-width: 78%!important;
 }
 </style>

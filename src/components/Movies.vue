@@ -123,7 +123,6 @@ export default {
   },
   methods: {
     extension (url) {
-      console.log(url)
       // Remove everything to the last slash in URL
       url = url.substr(1 + url.lastIndexOf('/'))
       // Break URL at ? and take first part (file name, extension)
@@ -208,7 +207,7 @@ a {
  word-wrap: break-word;
 }
 .mainblock {
-  max-width: 800px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 .videoblock {
