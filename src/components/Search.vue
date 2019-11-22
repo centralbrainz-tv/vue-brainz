@@ -99,14 +99,37 @@ export default {
   },
   data () {
     return {
-      msg: 'Abhorrent unknown, Psyche and Abominations, Curious Anthropology',
-      movies: json,
+      movies: this.jsonWithUrl(json),
       demons: demonsJson
     }
   },
   methods: {
+    jsonWithUrl (json) {
+      let jsonOut = []
+      json.forEach(item => {
+        const r = this.$route.params.search
+        const str = item.name
+        const n = str.toLowerCase().indexOf(r)
+        if (n >= 0) {
+          jsonOut.push(item)
+        }
+      })
+      return jsonOut
+    },
+    catshashes (name) {
+      let array = []
+      this.jsonWithUrl(json).forEach(element => {
+        const str = element.name
+        if (str === name) {
+          let cats = element.rottenTomato.genre.split(', ')
+          cats.forEach(cat => {
+            array.push(cat)
+          })
+        }
+      })
+      return array.filter((item, index) => array.indexOf(item) === index)
+    },
     extension (url) {
-      console.log(url)
       // Remove everything to the last slash in URL
       url = url.substr(1 + url.lastIndexOf('/'))
       // Break URL at ? and take first part (file name, extension)
@@ -118,30 +141,14 @@ export default {
 
       return url
     },
-    catshashes (name) {
-      let array = []
-      this.movies.forEach(element => {
-        const str = element.name
-        if (str === name) {
-          let cats = element.rottenTomato.genre.split(', ')
-          cats.forEach(cat => {
-            array.push(cat)
-          })
-        }
-      })
-      return array.filter((item, index) => array.indexOf(item) === index)
-    },
     calcDemon () {
       const rnd = Math.floor(Math.random() * this.demons.length)
       return this.demons[rnd]
     }
   },
   computed: {
-    hashDemon () {
-      return this.calcDemon()
-    },
     videos () {
-      return this.movies
+      return this.jsonWithUrl(json)
     }
   },
   mounted: function () {

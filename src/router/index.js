@@ -4,6 +4,7 @@ import Movies from '@/components/Movies'
 import Movie from '@/components/Movie'
 import Genre from '@/components/Genre'
 import Rating from '@/components/Rating'
+import Search from '@/components/Search'
 
 Vue.use(Router)
 
@@ -21,13 +22,18 @@ export default new Router({
     },
     {
       path: '/genre/:genre',
-      name: 'Movie',
+      name: 'Genre',
       component: Genre
     },
     {
       path: '/rating/:rating',
-      name: 'Movie',
+      name: 'Rating',
       component: Rating
+    },
+    {
+      path: '/search/:search',
+      name: 'Search',
+      component: Search
     }
   ]
 })
