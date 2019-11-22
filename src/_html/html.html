@@ -1,17 +1,17 @@
 <template>
     <div class="mainblock">
-        <h1 class="red">{{ msg }}</h1>
+        <h1 class="red">{{ message }}</h1>
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
                     <router-link :to="movie.rottenTomato.imgUrl" class="article_movie_poster">
                         <div><img class="article_poster" :src="movie.rottenTomato.imgUrl" alt="" sborder=""
-                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px;">
+                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
                 </div>
-                <div class="col-full-xs countdown-item-content">
+                <div class="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
@@ -54,9 +54,10 @@
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
+                                    <span class="red">Aggregate median rating: </span>
                                     <star-rating inactive-color="white" active-color="red" :increment="0.01"
                                         :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0"
-                                        :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
+                                        :fixed-points="2" :max-rating="10" :star-size="20" :border-width="1"
                                         border-color="red" :read-only="true"></star-rating>
                                 </div>
                             </div>

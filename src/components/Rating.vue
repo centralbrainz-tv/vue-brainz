@@ -7,7 +7,7 @@
                 <div class="col-sm-3 col-full-xs img-thumb">
                     <router-link :to="movie.rottenTomato.imgUrl" class="article_movie_poster">
                         <div><img class="article_poster" :src="movie.rottenTomato.imgUrl" alt="" sborder=""
-                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px;">
+                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
                 </div>

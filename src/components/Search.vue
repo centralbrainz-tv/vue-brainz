@@ -7,13 +7,13 @@
                 <div class="col-sm-3 col-full-xs img-thumb">
                     <router-link :to="movie.rottenTomato.imgUrl" class="article_movie_poster">
                         <div><img class="article_poster" :src="movie.rottenTomato.imgUrl" alt="" sborder=""
-                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px;">
+                                style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
                 </div>
                 <div class="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
-                        <div style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Audience Score: </span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Aggregate median rating: </span>
