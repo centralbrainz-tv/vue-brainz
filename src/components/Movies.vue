@@ -231,6 +231,7 @@ a {
 .row {
   padding-top: 10px;
   padding-bottom: 20px;
+  flex-wrap: unset;
 }
 .row-sub {
   padding-top: 2px;
