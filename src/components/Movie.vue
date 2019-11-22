@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Critic Consensus: </span>
                             {{ movie.rottenTomato.criticConsensus }}
                         </div>
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Additional information: </span><br />
                             <div class="small-font">
                                 <a :href="movie.imdb.url + movie.imdb.certificationsUrl" class="green">Parental

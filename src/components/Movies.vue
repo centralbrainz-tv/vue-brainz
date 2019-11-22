@@ -11,9 +11,9 @@
                         </div>
                     </router-link>
                 </div>
-                <div class="col-sm-8 col-full-xs countdown-item-content">
+                <div class="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Audience Score: </span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-title-bar">
-                        <div class="col-sm-8 col-full-xs" style="height: 100%;">
+                        <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <star-rating inactive-color="white" active-color="red" :increment="0.01"
@@ -63,19 +63,19 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Critic Consensus: </span>
                             {{ movie.rottenTomato.criticConsensus }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Short info: </span>
                             {{ movie.imdb.info }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8 small-font">
+                        <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
                                 &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
@@ -253,5 +253,9 @@ a {
   float: right;
   position: absolute;
   display: none;
+}
+.col-78 {
+  flex: 0 0 78%!important;
+  max-width: 78%!important;
 }
 </style>

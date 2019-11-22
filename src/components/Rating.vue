@@ -63,13 +63,13 @@
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Critic Consensus: </span>
                             {{ movie.rottenTomato.criticConsensus }}
                         </div>
                     </div>
                     <div class="row row-sub countdown-item-details">
-                        <div class="col-sm-8">
+                        <div>
                             <span class="red">Short info: </span>
                             {{ movie.imdb.info }}
                         </div>
