@@ -316,4 +316,8 @@ body {
   flex: 0 0 100%;
   max-width: 1024px;
 }
+.col-sm-3 {
+  flex: unset!important;
+  max-width: unset!important;
+}
 </style>
