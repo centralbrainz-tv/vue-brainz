@@ -175,12 +175,12 @@
                         </div>
                     </div>
                 </div>
-                <hr class="red" />
+                <hr class="red hr800" />
                 <div class="brain-container" v-if="demon = calcDemon()">
                     <img :src="demon.url" class="demon" :alt="demon.alt" :title="demon.alt" width="160" height="auto" />
                 </div>
             </div><br>
-            <hr class="red" />
+            <hr class="red hr800" />
             <div class="brain-container">
                 <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
             </div>

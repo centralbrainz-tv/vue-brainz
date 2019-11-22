@@ -4,7 +4,7 @@
         <h2 class="white">Horror Movie Database</h2>
         <img width="320" height="auto" src="/static/centralbrainz.png" />
         <br>
-        <hr class="red" />
+        <hr class="red hr800" />
         <div class="links">
             &bull; <a class="link" href="http://lariushin.org/">lariushin.org</a>
             &bull; <a class="link" href="http://lariushin.top/">lariushin.top</a>
@@ -25,7 +25,7 @@
             &bull; <a class="link" href="http://necronomicon.vip/">necronomicon.vip</a>
             &bull; <a class="link" href="http://asmodeus.vip/">asmodeus.vip</a> &bull;
         </div>
-        <hr class="red" />
+        <hr class="red hr800" />
         <br>
         <div class="input-group input-group-lg bottom">
             <div class="input-group-prepend">
@@ -35,7 +35,7 @@
         </div>
         <div v-if="data && data.length > 0" class="data">
             <br />
-            <hr class="red" />
+            <hr class="red hr800" />
             <br />
             <div v-for="(value, index) in data" :key="index" :ref="`card_${index}`" class="values">
                 <div class="div-img"><a :href="value.img_url" target="_blank"><img :src="value.img_url"
@@ -51,11 +51,11 @@
             </div>
         </div>
         <br />
-        <hr class="red" />
+        <hr class="red hr800" />
         <star-rating v-model="boundRating" @rating-selected="setRating" inactive-color="white" active-color="red"
             :increment="0.01" :rating="6.0" :fixed-points="2" :max-rating="10" :star-size="30" :border-width="1"
             border-color="red"></star-rating>
-        <hr class="red" />
+        <hr class="red hr800" />
         <router-view />
     </div>
 </template>
@@ -185,8 +185,12 @@ body {
 .red {
   border-color: red;
   border-bottom-style: unset;
+}
+
+.hr800 {
   max-width: 800px;
 }
+
 .bottom {
     margin-top: 50px;
     margin-left: 200px;
