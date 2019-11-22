@@ -118,7 +118,6 @@ export default {
   data () {
     return {
       demons: demonsJson,
-      msg: 'Filtered by Genre: ' + this.$route.params.genre
     }
   },
   methods: {
@@ -171,7 +170,7 @@ export default {
       return this.jsonWithUrl(json)
     },
     message () {
-      return this.msg
+      return 'Filtered by Genre: ' + this.$route.params.genre
     }
   },
   mounted: function () {

@@ -118,7 +118,6 @@ export default {
   data () {
     return {
       demons: demonsJson,
-      msg: 'Filtered by Rating: ' + this.$route.params.rating,
       rating: this.$route.params.rating
     }
   },
@@ -171,8 +170,8 @@ export default {
       return this.jsonWithUrl(json)
     },
     message () {
-      return this.msg
-    }
+      return 'Filtered by Rating: ' + this.$route.params.rating
+    },
   },
   mounted: function () {
   }

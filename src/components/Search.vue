@@ -118,7 +118,6 @@ export default {
   data () {
     return {
       demons: demonsJson,
-      msg: 'Filtered by Search query: ' + this.$route.params.search
     }
   },
   methods: {
@@ -169,7 +168,7 @@ export default {
       return this.jsonWithUrl(json)
     },
     message () {
-      return this.msg
+      return 'Filtered by Search query: ' + this.$route.params.search
     }
   },
   mounted: function () {

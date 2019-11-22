@@ -117,8 +117,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Abhorrent unknown, Psyche and Abominations, Curious Anthropology',
-      movies: json,
+      msg: 'Biggest catalog of Horror Movies in the internet',
       demons: demonsJson
     }
   },
@@ -155,7 +154,7 @@ export default {
   },
   computed: {
     videos () {
-      return this.movies
+      return json
     },
     message () {
       return this.msg

@@ -211,9 +211,7 @@ export default {
   },
   data () {
     return {
-      movies: this.jsonWithUrl(json),
       demons: demonsJson,
-      msg: this.$route.params.name
     }
   },
   methods: {
@@ -262,7 +260,7 @@ export default {
       return this.jsonWithUrl(json)
     },
     message () {
-      return this.msg
+      return this.$route.params.name
     },
     urlCalc () {
       return window.location.href
