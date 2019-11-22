@@ -117,7 +117,7 @@ export default {
   data () {
     return {
       demons: demonsJson,
-      msg: "Filtered by Genre: " + this.$route.params.genre
+      msg: 'Filtered by Genre: ' + this.$route.params.genre
     }
   },
   methods: {

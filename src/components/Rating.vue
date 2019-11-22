@@ -115,11 +115,10 @@ export default {
     }
   },
   data () {
-        return {
+    return {
       demons: demonsJson,
-      msg: "Filtered by Rating: " + this.$route.params.rating
+      msg: 'Filtered by Rating: ' + this.$route.params.rating
     }
-
   },
   methods: {
     jsonWithUrl (json) {
