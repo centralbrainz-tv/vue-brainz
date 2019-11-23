@@ -1,6 +1,7 @@
 <template>
     <div class="mainblock">
         <h1 class="red">{{ message }}</h1>
+        <h3 class="red">{{ videos.length }} results found</h3>
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
