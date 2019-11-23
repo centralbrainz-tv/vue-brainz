@@ -148,11 +148,17 @@ export default {
     calcDemon () {
       const rnd = Math.floor(Math.random() * this.demons.length)
       return this.demons[rnd]
+    },
+    sortByKey (array, key) {
+      return array.sort(function (a, b) {
+        var x = a[key]; var y = b[key]
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0))
+      })
     }
   },
   computed: {
     videos () {
-      return json
+      return this.sortByKey(json, 'name')
     },
     message () {
       return this.msg

@@ -122,7 +122,7 @@ export default {
           result.name = element.name
           result.description = element.imdb.arrayPlotSummary[0].text.indexOf('It looks like') === -1 ? element.imdb.arrayPlotSummary[0].text : ''
           result.url = encodeURI('/movie/' + element.name)
-          result.img_url = element.imdb.poster
+          result.img_url = element.imdb.poster === '' ? '/static/default.png' : element.imdb.poster
           results.push(result)
         }
       })
