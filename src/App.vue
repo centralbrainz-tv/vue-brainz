@@ -414,4 +414,10 @@ a {
 .center {
   text-align: center;
 }
+.row.row-sub.countdown-item-details>div>div>table {
+  width: 100%!important;
+}
+.row.row-sub.countdown-item-details>div{
+  width: 100%!important;
+}
 </style>
