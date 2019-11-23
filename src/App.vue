@@ -26,12 +26,15 @@
             &bull; <a class="link" href="http://asmodeus.vip/">asmodeus.vip</a> &bull;
         </div>
         <hr class="red hr800" />
-        <br>
+        <br/>
+        <h4 class="center">Search</h4>
         <div class="input-group input-group-lg bottom">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Search</span>
-            </div>
             <input type="text" class="form-control" @keyup.prevent="search" v-model="query" />
+        </div>
+        <br/>
+        <h4 class="center">Full-text search</h4>
+        <div class="input-group input-group-lg bottom">
+            <input type="text" class="form-control" @keyup.enter="searchFullText" v-model="queryFullText" />
         </div>
         <div v-if="data && data.length > 0" class="data">
             <br />
@@ -56,6 +59,10 @@
             :rating="6" :max-rating="10" :star-size="30" :border-width="1"
             border-color="red"></star-rating>
         <hr class="red hr800" />
+        <div v-if="years && years.length > 0" style="display: inline-flex;">
+          <div v-for="year in years" v-bind:key="year">(<router-link :to="'/year/' + year.substr(1, year.length - 2)">{{  year.substr(1, year.length - 2)  }}</router-link>)&nbsp;</div>
+        </div>
+        <hr class="red hr800" />
         <router-view />
     </div>
 </template>
@@ -70,6 +77,14 @@ export default {
       query: '',
       queryFullText: '',
       data: []
+    }
+  },
+  computed: {
+    years () {
+      const array = json.map(item => {
+        return item.title
+      })
+      return array.filter((item, index) => array.indexOf(item) === index)
     }
   },
   methods: {
@@ -101,6 +116,7 @@ export default {
       return url
     },
     search () {
+      this.data = []
       if (this.query.length < 3) {
         return
       }
@@ -129,10 +145,13 @@ export default {
       this.data = results
     },
     searchFullText () {
+      this.data = []
+      this.query = ''
       if (this.queryFullText.length < 3) {
         return
       }
       this.$router.push('/search/' + this.queryFullText)
+      this.queryFullText = ''
     }
   }
 }
@@ -381,5 +400,12 @@ a {
   bottom: 6px;
   right: -10px;
   position: relative;
+}
+.input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child) {
+  border-top-left-radius: 4px!important;
+  border-bottom-left-radius: 4px!important;
+}
+.center {
+  text-align: center;
 }
 </style>
