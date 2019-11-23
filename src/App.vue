@@ -123,11 +123,11 @@ export default {
         }
         */
         if (n >= 0) {
-          result.keywords = element.rottenTomato.genre
+          result.keywords = element.imdb.genre
           result.name = element.name
-          result.description = element.rottenTomato.criticConsensus
+          result.description = element.imdb.arrayPlotSummary[0].text
           result.url = encodeURI('/movie/' + element.name)
-          result.img_url = element.rottenTomato.imgUrl
+          result.img_url = element.imdb.poster
           results.push(result)
         }
       })
@@ -284,6 +284,7 @@ body {
 .col-78 {
   flex: unset!important;
   max-width: unset!important;
+  width: 100%;
 }
 .flip {
   -webkit-transform: scale(-1, -1);

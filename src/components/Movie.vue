@@ -5,8 +5,8 @@
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <router-link :to="movie.rottenTomato.imgUrl" class="article_movie_poster">
-                        <div><img class="article_poster" :src="movie.rottenTomato.imgUrl" alt="" sborder=""
+                    <router-link :to="movie.imdb.poster" class="article_movie_poster">
+                        <div><img class="article_poster" :src="movie.imdb.poster" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
@@ -20,14 +20,14 @@
                                         <router-link :to="'/movie/' + movie.name" class="red">{{ movie.name }}
                                         </router-link>
                                     </h2> <br />
-                                    <span class="red">Tomato Meter: </span>
-                                    <h5 class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
+                                    <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
+                                    <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
                                         {{ movie.rottenTomato.tomatoMeter.count }} total</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row row-sub countdown-item-title-bar">
+                    <div v-if="movie.rottenTomato" class="row row-sub countdown-item-title-bar">
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
@@ -44,7 +44,7 @@
                                 <div>
                                     <span class="red">IMDB Rating: </span>
                                     <h5 class="white"><a class="white"
-                                            :href="movie.imdb.url + movie.imdb.ratingUrl">{{ movie.imdb.rating }}</a> /
+                                            :href="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</a> /
                                         {{ movie.imdb.count }} total</h5>
                                 </div>
                             </div>
@@ -56,39 +56,15 @@
                                 <div>
                                     <span class="red">Aggregate median rating: </span>
                                     <star-rating inactive-color="white" active-color="red" :increment="0.01"
-                                        :rating="(movie.rottenTomato.tomatoMeter.score + movie.rottenTomato.audienceScore.score + movie.imdb.rating * 10.0) / 30.0"
+                                        :rating="(movie.imdb.rating * 10.0) / 10.0"
                                         :fixed-points="2" :max-rating="10" :star-size="20" :border-width="1"
                                         border-color="red" :read-only="true"></star-rating>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div>
-                            <span class="red">Critic Consensus: </span>
-                            {{ movie.rottenTomato.criticConsensus }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Info: </span>
-                            {{ movie.rottenTomato.info }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Short info: </span>
-                            {{ movie.imdb.info }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Storyline: </span>
-                            {{ movie.imdb.storyline }}
-                        </div>
-                    </div>
                     <div class="row countdown-item-details">
-                        <div class="small-font">
+                        <div>
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
                                 &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
@@ -96,88 +72,29 @@
                             </template>
                         </div>
                     </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Rating: </span>
-                            {{ movie.rottenTomato.rating }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Genre: </span>
-                            {{ movie.rottenTomato.genre }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Directed by: </span>
-                            {{ movie.rottenTomato.directedBy }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Written by: </span>
-                            {{ movie.rottenTomato.writtenBy }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Release date: </span>
-                            {{ movie.rottenTomato.inTheaters }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">On disc: </span>
-                            {{ movie.rottenTomato.onDisc }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Run time: </span>
-                            {{ movie.rottenTomato.runtime }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
-                        <div class="small-font">
-                            <span class="red">Studio: </span>
-                            {{ movie.rottenTomato.studio }}
-                        </div>
-                    </div>
-                    <div class="row row-sub countdown-item-details">
+                    <div v-if="movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
                         <div>
-                            <span class="red">Additional information: </span><br />
-                            <div class="small-font">
-                                <a :href="movie.imdb.url + movie.imdb.certificationsUrl" class="green">Parental
-                                    guide</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.taglinesUrl" class="green">Taglines</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.filmingLocationsUrl" class="green">Filming
-                                    locations</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.releaseInfoUrl" class="green">Release
-                                    info</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.technicalSpecsUrl" class="green">Technical
-                                    specification</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.soundTracksUrl" class="green">Sound
-                                    track</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.triviaUrl" class="green">Trivia</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.goofsUrl" class="green">Goofs</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.quotesUrl" class="green">Quotes</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.crazyCreditsUrl" class="green">Crazy
-                                    credits</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.alternateVersionsUrl" class="green">Alternative
-                                    version</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.connectionsUrl" class="green">Movie
-                                    connections</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.faqUrl" class="green">FAQ</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.awardsUrl" class="green">Awards and
-                                    nominations</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.plotSummaryUrl" class="green">Awards and
-                                    nominations</a><br />
-                                <a :href="movie.imdb.url + movie.imdb.synopsisUrl" class="green">Awards and
-                                    nominations</a><br />
-                                <a :href="movie.rottenTomato.url" class="green">Rotten Tomatoes</a><br />
-                            </div>
+                            <span class="red">Summaries: </span>
+                            <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">
+                                {{ summary.text.indexOf('It looks like') === -1 ? summary.text : '' }}
+                                <span class='pink'>{{ summary.author }}</span>
+                            </p>
                         </div>
+                    </div>
+                    <div v-if="movie.imdb.arraySynopsis[0].text !== '' && movie.imdb.arraySynopsis[0].text.indexOf('It looks like') === -1" class="row row-sub countdown-item-details">
+                        <div>
+                            <span class="red">Synopsis: </span>
+                            <p v-for="(summary, index) in movie.imdb.arraySynopsis" v-bind:key="index">
+                                {{ summary.text.indexOf('It looks like') === -1 ? summary.text : '' }}
+                                <span class='pink'>{{ summary.author }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div v-for="(credit, index) in  movie.imdb.arrayFullCredit" v-bind:key="index" class="row row-sub countdown-item-details">
+                        <div>
+                            <span class="red" v-html="credit.name + ': '"></span>
+                            <div v-html="credit.text.indexOf('It looks like') === -1 ? credit.text : ''"></div>
+                        <div>
                     </div>
                 </div>
                 <hr class="red hr800" />
@@ -234,7 +151,7 @@ export default {
       this.jsonWithUrl(json).forEach(element => {
         const str = element.name
         if (str === name) {
-          let cats = element.rottenTomato.genre.split(', ')
+          let cats = element.imdb.genre.split(', ')
           cats.forEach(cat => {
             array.push(cat)
           })
