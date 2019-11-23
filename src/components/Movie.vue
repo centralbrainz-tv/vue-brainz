@@ -18,8 +18,9 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <router-link :to="'/movie/' + movie.name" class="red">{{ movie.name }}
-                                        </router-link>
+                                       <h2>
+                                        <router-link :to="'/movie/' + movie.name" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1)" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
+                                      </h2>
                                     </h2> <br />
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /

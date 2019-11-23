@@ -56,10 +56,6 @@
             :rating="6" :max-rating="10" :star-size="30" :border-width="1"
             border-color="red"></star-rating>
         <hr class="red hr800" />
-        <div v-for="n in years(1890, 2020)" v-bind:key="n">
-          <router-link :to="'/year/' + n">{{  n  }}</router-link>&nbsp;
-        <div>
-        <hr class="red hr800" />
         <router-view />
     </div>
 </template>
@@ -79,13 +75,6 @@ export default {
   methods: {
     setRating: function (rating) {
       this.$router.push('/rating/' + rating)
-    },
-    years (a, b) {
-      let s = []
-      for (i = a; i<=b; i++) {
-        s.push(i)
-      }
-      return s
     },
     clearData (url) {
       this.$router.push(url)
