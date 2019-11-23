@@ -5,9 +5,9 @@
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <router-link :to="movie.imdb.poster" class="article_movie_poster">
+                    <router-link :to="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
                         <div>
-                            <img class="article_poster" :src="movie.imdb.poster" alt="" sborder=""
+                            <img class="article_poster" :src="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
@@ -122,10 +122,17 @@ export default {
     jsonWithUrl (json) {
       let jsonOut = []
       json.forEach(item => {
+        let str
         const r = this.$route.params.search
-        const str = item.name
-        const n = str.toLowerCase().indexOf(r)
-        if (n >= 0) {
+        console.log(r)
+        item.imdb.arraySynopsis.forEach((element, index) => {
+          str = str + element.text
+          item.imdb.arrayPlotSummary.forEach((e, i) => {
+            str = str + e.text
+          })
+        })
+        console.log(str)
+        if (str.toLowerCase().indexOf(r) >= 0) {
           jsonOut.push(item)
         }
       })

@@ -42,7 +42,7 @@
                             class="thumb" /></a></div>
                 <div class="div-value">
                     <h5><a href="#" class="rot" @click="clearData(value.url)">{{value.name}}</a></h5>
-                    <h6 class="blue">{{value.description}}</h6>
+                    <h6 class="blue" v-html="value.description"></h6>
                     <template v-for="cathash in catshashes(value.keywords)">
                         &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash)"
                             v-bind:key="cathash">{{ cathash }}</a>
@@ -68,6 +68,7 @@ export default {
     return {
       boundRating: 3,
       query: '',
+      queryFullText: '',
       data: []
     }
   },
@@ -125,13 +126,19 @@ export default {
         if (n >= 0) {
           result.keywords = element.imdb.genre
           result.name = element.name
-          result.description = element.imdb.arrayPlotSummary[0].text
+          result.description = element.imdb.arrayPlotSummary[0].text.indexOf('It looks like') === -1 ? element.imdb.arrayPlotSummary[0].text : ''
           result.url = encodeURI('/movie/' + element.name)
           result.img_url = element.imdb.poster
           results.push(result)
         }
       })
       this.data = results
+    },
+    searchFullText () {
+      if (this.queryFullText.length < 3) {
+        return
+      }
+      this.$router.push('/search/' + this.queryFullText)
     }
   }
 }

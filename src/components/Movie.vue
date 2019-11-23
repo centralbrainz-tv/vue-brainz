@@ -5,8 +5,9 @@
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <router-link :to="movie.imdb.poster" class="article_movie_poster">
-                        <div><img class="article_poster" :src="movie.imdb.poster" alt="" sborder=""
+                    <router-link :to="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
+                        <div>
+                            <img class="article_poster" :src="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
@@ -75,19 +76,19 @@
                     <div v-if="movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
                         <div>
                             <span class="red">Summaries: </span>
-                            <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">
-                                {{ summary.text.indexOf('It looks like') === -1 ? summary.text : '' }}
-                                <span class='pink' v-html="summary.author"></span>
-                            </p>
+                            <div v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">
+                              <p v-html="summary.text.indexOf('It looks like') === -1 ? summary.text : ''"></p>
+                              <span class='pink' v-html="summary.author"></span>
+                            </div>
                         </div>
                     </div>
                     <div v-if="movie.imdb.arraySynopsis[0].text !== '' && movie.imdb.arraySynopsis[0].text.indexOf('It looks like') === -1" class="row row-sub countdown-item-details">
                         <div>
                             <span class="red">Synopsis: </span>
-                            <p v-for="(summary, index) in movie.imdb.arraySynopsis" v-bind:key="index">
-                                {{ summary.text.indexOf('It looks like') === -1 ? summary.text : '' }}
+                            <div v-for="(summary, index) in movie.imdb.arraySynopsis" v-bind:key="index">
+                                <p v-html="summary.text.indexOf('It looks like') === -1 ? summary.text : ''"></p>
                                 <span class='pink' v-html="summary.author"></span>
-                            </p>
+                            </div>
                         </div>
                     </div>
                     <div v-for="(credit, index) in  movie.imdb.arrayFullCredit" v-bind:key="index" class="row row-sub countdown-item-details">
