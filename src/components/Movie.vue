@@ -77,7 +77,7 @@
                             <span class="red">Summaries: </span>
                             <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">
                                 {{ summary.text.indexOf('It looks like') === -1 ? summary.text : '' }}
-                                <span class='pink'>{{ summary.author }}</span>
+                                <span class='pink' v-html="summary.author"></span>
                             </p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                             <span class="red">Synopsis: </span>
                             <p v-for="(summary, index) in movie.imdb.arraySynopsis" v-bind:key="index">
                                 {{ summary.text.indexOf('It looks like') === -1 ? summary.text : '' }}
-                                <span class='pink'>{{ summary.author }}</span>
+                                <span class='pink' v-html="summary.author"></span>
                             </p>
                         </div>
                     </div>
