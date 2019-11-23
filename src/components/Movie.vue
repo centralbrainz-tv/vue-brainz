@@ -140,7 +140,7 @@
                             <div v-html="obj.text.indexOf('It looks like') === -1 ? obj.text : ''"></div>
                         </div>
                     </div>
-                    <div v-for="(obj, index) in movie.imdb.arrayParentalGuide" v-bind:key="index" class="row row-sub countdown-item-details">
+                    <div v-for="(obj, index) in (movie.imdb.arrayParentalGuide[0].text.length > 0 ? movie.imdb.arrayParentalGuide : [])" v-bind:key="index" class="row row-sub countdown-item-details">
                         <div>
                             <span class="red" v-html="obj.name + ': '"></span>
                             <div v-html="obj.text.indexOf('It looks like') === -1 ? obj.text : ''"></div>
