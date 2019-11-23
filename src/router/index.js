@@ -5,6 +5,7 @@ import Movie from '@/components/Movie'
 import Genre from '@/components/Genre'
 import Rating from '@/components/Rating'
 import Search from '@/components/Search'
+import Year from '@/components/Year'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/search/:search',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/year/:year',
+      name: 'Year',
+      component: Year
     }
   ]
 })

@@ -5,9 +5,9 @@
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <router-link :to="movie.imdb.poster" class="article_movie_poster">
+                    <router-link :to="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
                         <div>
-                            <img class="article_poster" :src="movie.imdb.poster" alt="" sborder=""
+                            <img class="article_poster" :src="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
@@ -69,7 +69,7 @@
                             <span class="red">Summaries: </span>
                             <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">
                                 <span v-html="summary.text.indexOf('It looks like') === -1 ? summary.text : ''"></span>
-                                <span>{{ summary.author }}</span>
+                                <span class='pink' v-html="summary.author"></span>
                             </p>
                         </div>
                     </div>
@@ -95,3 +95,84 @@
         </div>
     </div>
 </template>
+
+<script>
+import json from '../json/movies.json'
+import demonsJson from '../json/demons.json'
+import Vue from 'vue'
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
+export default {
+  name: 'video-collection',
+  props: {
+    options: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
+  data () {
+    return {
+      demons: demonsJson
+    }
+  },
+  methods: {
+    jsonWithUrl (json) {
+      let jsonOut = []
+      json.forEach(item => {
+        let str = item.name
+        const r = this.$route.params.year
+        if (str.toLowerCase().indexOf(r) >= 0) {
+          jsonOut.push(item)
+        }
+      })
+      return jsonOut
+    },
+    catshashes (name) {
+      let array = []
+      this.jsonWithUrl(json).forEach(element => {
+        const str = element.name
+        if (str === name) {
+          let cats = element.imdb.genre.split(', ')
+          cats.forEach(cat => {
+            array.push(cat)
+          })
+        }
+      })
+      return array.filter((item, index) => array.indexOf(item) === index)
+    },
+    extension (url) {
+      // Remove everything to the last slash in URL
+      url = url.substr(1 + url.lastIndexOf('/'))
+      // Break URL at ? and take first part (file name, extension)
+      url = url.split('?')[0]
+      // Sometimes URL doesn't have ? but #, so we should aslo do the same for #
+      url = url.split('#')[0]
+      // Now we have only extension
+      url = url.substr(0, url.lastIndexOf('.'))
+
+      return url
+    },
+    calcDemon () {
+      const rnd = Math.floor(Math.random() * this.demons.length)
+      return this.demons[rnd]
+    }
+  },
+  computed: {
+    videos () {
+      return this.jsonWithUrl(json)
+    },
+    message () {
+      return 'Movies released in ' + this.$route.params.year + '0s'
+    }
+  },
+  mounted: function () {
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>
