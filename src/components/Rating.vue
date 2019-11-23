@@ -129,7 +129,6 @@ export default {
           jsonOut.push(item)
         }
       })
-      jsonOut = jsonOut.slice(0, 200)
       return jsonOut
     },
     catshashes (name) {
@@ -161,16 +160,16 @@ export default {
       const rnd = Math.floor(Math.random() * this.demons.length)
       return this.demons[rnd]
     },
-    sortByKey (array, key) {
+    sortByKey (array, key, reversed = 1) {
       return array.sort(function (a, b) {
-        var x = a[key]; var y = b[key]
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0))
+        var x = a['imdb'][key]; var y = b['imdb'][key]
+        return ((x < y) ? (1 * reversed) : ((x > y) ? (-1 * reversed) : 0))
       })
     }
   },
   computed: {
     videos () {
-      return this.sortByKey(this.jsonWithUrl(json), 'name')
+      return this.sortByKey(this.jsonWithUrl(json).slice(0, 200), 'name')
     },
     message () {
       return this.$route.params.rating + ' stars movies hits: '

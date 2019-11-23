@@ -131,7 +131,6 @@ export default {
           jsonOut.push(item)
         }
       })
-      jsonOut = jsonOut.slice(0, 200)
       return jsonOut
     },
     catshashes (name) {
@@ -172,7 +171,7 @@ export default {
   },
   computed: {
     videos () {
-      return this.sortByKey(this.jsonWithUrl(json), 'name')
+      return this.sortByKey(this.jsonWithUrl(json).slice(0, 200), 'name')
     },
     message () {
       return 'Filtered by Genre: ' + this.$route.params.genre
