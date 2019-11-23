@@ -84,10 +84,16 @@ export default {
       const array = json.map(item => {
         return item.title
       })
-      return array.filter((item, index) => array.indexOf(item) === index)
+      return (array.filter((item, index) => array.indexOf(item) === index)).sort()
     }
   },
   methods: {
+    sortByKey (array, key, reversed = 1) {
+      return array.sort(function (a, b) {
+        var x = a['imdb'][key]; var y = b['imdb'][key]
+        return ((x < y) ? (1 * reversed) : ((x > y) ? (-1 * reversed) : 0))
+      })
+    },
     setRating: function (rating) {
       this.$router.push('/rating/' + rating)
     },
