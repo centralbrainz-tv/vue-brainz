@@ -129,6 +129,7 @@ export default {
           jsonOut.push(item)
         }
       })
+      jsonOut.slice(0, 200)
       return jsonOut
     },
     catshashes (name) {

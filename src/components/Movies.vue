@@ -134,7 +134,7 @@ export default {
     },
     catshashes (name) {
       let array = []
-      json.forEach(element => {
+      json.forEach((element, index) => {
         const str = element.name
         if (str === name) {
           let cats = element.imdb.genre.split(', ')
@@ -149,16 +149,16 @@ export default {
       const rnd = Math.floor(Math.random() * this.demons.length)
       return this.demons[rnd]
     },
-    sortByKey (array, key) {
+    sortByKey (array, key, reversed = 1) {
       return array.sort(function (a, b) {
-        var x = a[key]; var y = b[key]
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0))
+        var x = a['imdb'][key]; var y = b['imdb'][key]
+        return ((x < y) ? (1 * reversed) : ((x > y) ? (-1 * reversed) : 0))
       })
     }
   },
   computed: {
     videos () {
-      return this.sortByKey(json, 'name')
+      return this.sortByKey(json.slice(0, 200), 'count', 1)
     },
     message () {
       return this.msg
