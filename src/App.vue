@@ -60,7 +60,7 @@
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <div v-if="years && years.length > 0" style="display: inline-flex;">
-          <div v-for="year in years" v-bind:key="year">(<router-link :to="'/year/' + year.substr(1, year.length - 2)">{{  year.substr(1, year.length - 2)  }}</router-link>)&nbsp;</div>
+          <a :href="'/year/' + year.substr(1, year.length - 2)"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }}&nbsp;</a>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -308,8 +308,8 @@ body {
   display: none;
 }
 .col-78 {
-  flex: unset!important;
   max-width: unset!important;
+  flex: unset!important;
   width: 100%;
 }
 .flip {
@@ -419,5 +419,15 @@ a {
 }
 .row.row-sub.countdown-item-details>div{
   width: 100%!important;
+}
+@media only screen and (max-width: 600px) {
+  div.row.countdown-item {
+    flex-wrap: wrap!important;
+  }
+}
+@media only screen and (min-width : 601px) {
+  div.row.countdown-item {
+    flex-wrap: unset!important;
+  }
 }
 </style>
