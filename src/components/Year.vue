@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
+                    <div v-if="movie.imdb.arrayPlotSummary.length > 0 && movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
                         <div>
                             <span class="red">Summaries: </span>
                             <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">

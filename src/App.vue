@@ -55,12 +55,12 @@
         </div>
         <br />
         <hr class="red hr800" />
-        <star-rating v-model="boundRating" @rating-selected="setRating" inactive-color="white" active-color="red"
-            :rating="6" :max-rating="10" :star-size="30" :border-width="1"
+        <star-rating v-model="boundRating" @rating-selected="setRating" inactive-color="black" active-color="red"
+            :rating="7" :max-rating="10" :border-width="4" :increment="1" :fixed-points="0" :star-size="20"
             border-color="red"></star-rating>
         <hr class="red hr800" />
-        <div v-if="years && years.length > 0" style="display: inline-flex;">
-          <a :href="'/year/' + year.substr(1, year.length - 2)"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }}&nbsp;</a>
+        <div v-if="years && years.length > 0" style="display: block;">
+          <a :href="'#/year/' + year.substr(1, year.length - 2)"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </a>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -73,7 +73,7 @@ export default {
   name: 'App',
   data () {
     return {
-      boundRating: 3,
+      boundRating: 7,
       query: '',
       queryFullText: '',
       data: []
@@ -164,6 +164,14 @@ export default {
 </script>
 
 <style>
+a {
+  color: #00FF00!important;
+  text-decoration: unset!important;
+}
+a:hover {
+  color: deeppink!important;
+  text-decoration: unset!important;
+}
 body {
   background-color: black!important;
   color: white!important;
@@ -197,7 +205,7 @@ body {
   word-wrap: break-word;
 }
 .yellow {
-  color: yellow;
+  color: yellow!important;
   word-wrap: break-word;
 }
 .green {
@@ -401,11 +409,12 @@ a {
   margin: 0 auto;
 }
 .vue-star-rating-rating-text {
-  font-size: 26pt;
+  font-size: 35pt;
   color: red;
-  bottom: 6px;
+  bottom: 8px;
   right: -10px;
   position: relative;
+  display: none;
 }
 .input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child) {
   border-top-left-radius: 4px!important;
@@ -429,5 +438,11 @@ a {
   div.row.countdown-item {
     flex-wrap: unset!important;
   }
+}
+.disqus-row {
+  padding: 10px!important;
+}
+.row-sub {
+  flex-wrap: wrap;
 }
 </style>
