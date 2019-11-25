@@ -158,7 +158,7 @@ export default {
   },
   computed: {
     videos () {
-      return this.sortByKey(json.slice(0, 200), 'count', 1)
+      return this.sortByKey(json.slice(0, 100), 'count', 1)
     },
     message () {
       return this.msg

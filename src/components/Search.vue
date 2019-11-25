@@ -122,7 +122,7 @@ export default {
     jsonWithUrl (json) {
       let jsonOut = []
       json.forEach(item => {
-        let str
+        let str = ''
         const r = this.$route.params.search
         item.imdb.arraySynopsis.forEach((element, index) => {
           str = str + element.text
@@ -174,7 +174,7 @@ export default {
   },
   computed: {
     videos () {
-      return this.sortByKey(this.jsonWithUrl(json).slice(0, 200), 'name')
+      return this.sortByKey(this.jsonWithUrl(json).slice(0, 100), 'name')
     },
     message () {
       return 'Filtered by Search query: ' + this.$route.params.search

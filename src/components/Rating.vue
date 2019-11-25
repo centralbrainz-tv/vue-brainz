@@ -169,7 +169,7 @@ export default {
   },
   computed: {
     videos () {
-      return this.sortByKey(this.jsonWithUrl(json).slice(0, 200), 'name')
+      return this.sortByKey(this.jsonWithUrl(json).slice(0, 100), 'name')
     },
     message () {
       return this.$route.params.rating + ' stars movies hits: '
