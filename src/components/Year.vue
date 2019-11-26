@@ -1,25 +1,25 @@
 <template>
     <div class="mainblock">
         <h1 class="red">{{ message }}</h1>
-        <h3 class="red">{{ videos.length }} results found</h3>
+        <h3 class="red">{{ videos && videos.length }} results found</h3>
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <a :href="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
+                    <a :href="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
                         <div>
-                            <img class="article_poster" :src="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
+                            <img class="article_poster" :src="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </a>
                 </div>
-                <div class="col-78 col-full-xs countdown-item-content">
+                <div v-if="movie.title !== undefined && movie.title !== ''" lass="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <router-link :to="'/movie/' + movie.name" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1)" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
+                                        <a :href="'#/movie/' + movie.name" class="red">{{ movie.titleYear }}</a>&nbsp;(<a :href="'#/year/' + movie.title.substring(1, movie.title.length-1)" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</a>)
                                     </h2>
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
@@ -77,8 +77,8 @@
                         <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
-                                    #{{ cathash }}</router-link>
+                                &nbsp;<a class="yellow" :href="'#/genre/' + cathash + ''" v-bind:key="cathash">
+                                    #{{ cathash }}</a>
                             </template>
                         </div>
                     </div>
@@ -97,12 +97,12 @@
 </template>
 
 <script>
-import json from '../json/movies.json'
 import demonsJson from '../json/demons.json'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
 
 Vue.use(VueClipboard)
+
 export default {
   name: 'video-collection',
   props: {
@@ -113,18 +113,29 @@ export default {
       }
     }
   },
+  watch: {
+    '$route.params.year': function (id) {
+      const dataURL = 'https://centralbrainz.tv/php-service/year/' + this.$route.params.year + '/page/100/100'
+      this.$axios
+        .get(dataURL)
+        .then(response => (
+          this.videos = response.data
+        ))
+    }
+  },
   data () {
     return {
-      demons: demonsJson
+      demons: demonsJson,
+      videos: []
     }
   },
   methods: {
-    jsonWithUrl (json) {
+    jsonWithUrl (videos) {
       if (this.$route.params.year.length < 4) {
         return []
       }
       let jsonOut = []
-      json.forEach(item => {
+      videos.forEach(item => {
         let str = item.name
         const r = this.$route.params.year
         if (str.toLowerCase().indexOf(r) >= 0) {
@@ -135,7 +146,7 @@ export default {
     },
     catshashes (name) {
       let array = []
-      this.jsonWithUrl(json).forEach(element => {
+      this.jsonWithUrl(this.videos).forEach(element => {
         const str = element.name
         if (str === name) {
           let cats = element.imdb.genre.split(', ')
@@ -164,20 +175,23 @@ export default {
     },
     sortByKey (array, key, reversed = 1) {
       return array.sort(function (a, b) {
-        var x = a['imdb'][key]; var y = b['imdb'][key]
+        var x = a[key]; var y = b[key]
         return ((x < y) ? (1 * reversed) : ((x > y) ? (-1 * reversed) : 0))
       })
     }
   },
   computed: {
-    videos () {
-      return this.sortByKey(this.jsonWithUrl(json).slice(0, 200), 'name')
-    },
     message () {
       return 'Movies released in ' + this.$route.params.year
     }
   },
-  mounted: function () {
+  mounted () { // when the Vue app is booted up, this is run automatically.
+    const dataURL = 'https://centralbrainz.tv/php-service/year/' + this.$route.params.year + '/page/100/100'
+    this.$axios
+      .get(dataURL)
+      .then(response => (
+        this.videos = response.data
+      ))
   }
 }
 </script>

@@ -67,7 +67,6 @@
     </div>
 </template>
 <script>
-import json from './json/movies.json'
 
 export default {
   name: 'App',
@@ -75,16 +74,10 @@ export default {
     return {
       boundRating: 7,
       query: '',
+      years: [],
       queryFullText: '',
-      data: []
-    }
-  },
-  computed: {
-    years () {
-      const array = json.map(item => {
-        return item.title
-      })
-      return (array.filter((item, index) => array.indexOf(item) === index)).sort()
+      data: [],
+      videos: []
     }
   },
   methods: {
@@ -127,7 +120,7 @@ export default {
         return
       }
       let results = []
-      json.forEach(element => {
+      this.videos.forEach(element => {
         let str, n
         let result = {
           keywords: '',
@@ -159,6 +152,22 @@ export default {
       this.$router.push('/search/' + this.queryFullText)
       this.queryFullText = ''
     }
+  },
+  mounted () { // when the Vue app is booted up, this is run automatically.
+    const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.$route.params.search + '/page/100/100'
+    const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/100/100'
+    let self = this
+
+    this.$axios
+      .get(dataURL)
+      .then(function (response) {
+        self.videos = response.data
+      })
+    this.$axios
+      .get(yearURL)
+      .then(function (response) {
+        self.years = response.data
+      })
   }
 }
 </script>

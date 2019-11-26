@@ -1,25 +1,25 @@
 <template>
     <div class="mainblock">
         <h1 class="red">{{ message }}</h1>
-        <h3 class="red">{{ videos.length }} results found</h3>
-        <div class="white left-align data" v-if="videos && videos.length > 0">
+        <h3 class="red">{{ this.videos.length }} results found</h3>
+        <div class="white left-align data" v-if="videos && this.videos.length > 0">
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <a :href="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
+                    <a :href="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
                         <div>
-                            <img class="article_poster" :src="movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
+                            <img class="article_poster" :src="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </a>
                 </div>
-                <div class="col-78 col-full-xs countdown-item-content">
+                <div v-if="movie.title !== undefined && movie.title !== ''" lass="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <router-link :to="'/movie/' + movie.name" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1)" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
+                                        <a :href="'#/movie/' + movie.name" class="red">{{ movie.titleYear }}</a>&nbsp;(<a :href="'#/year/' + movie.title.substring(1, movie.title.length-1)" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</a>)
                                     </h2>
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
+                    <div v-if="movie.imdb.arrayPlotSummary.length > 0 && movie.imdb.arrayPlotSummary[0] !== undefined && movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
                         <div>
                             <span class="red">Summaries: </span>
                             <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" v-bind:key="index">
@@ -77,8 +77,8 @@
                         <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + ''" v-bind:key="cathash">
-                                    #{{ cathash }}</router-link>
+                                &nbsp;<a class="yellow" :href="'#/genre/' + cathash + ''" v-bind:key="cathash">
+                                    #{{ cathash }}</a>
                             </template>
                         </div>
                     </div>
@@ -97,11 +97,10 @@
 </template>
 
 <script>
-import json from '../json/movies.json'
+// import json from '../json/movies.json'
 import demonsJson from '../json/demons.json'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
-
 Vue.use(VueClipboard)
 export default {
   name: 'video-collection',
@@ -115,6 +114,7 @@ export default {
   },
   data () {
     return {
+      videos: [],
       msg: 'Biggest catalog of Horror Movies in the internet',
       demons: demonsJson
     }
@@ -134,7 +134,7 @@ export default {
     },
     catshashes (name) {
       let array = []
-      json.forEach((element, index) => {
+      this.videos.forEach((element, index) => {
         const str = element.name
         if (str === name) {
           let cats = element.imdb.genre.split(', ')
@@ -157,14 +157,18 @@ export default {
     }
   },
   computed: {
-    videos () {
-      return this.sortByKey(json.slice(0, 200), 'count', 1)
-    },
     message () {
       return this.msg
     }
   },
-  mounted: function () {
+  mounted () { // when the Vue app is booted up, this is run automatically.
+    const dataURL = 'https://centralbrainz.tv/php-service/index/index/page/100/100'
+    this.$axios
+      .get(dataURL)
+      .then(response => (
+        // console.log(response)
+        this.videos = response.data
+      ))
   }
 }
 </script>
