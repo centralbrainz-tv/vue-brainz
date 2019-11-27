@@ -29,13 +29,9 @@
         <br/>
         <h4 class="center">Search</h4>
         <div class="input-group input-group-lg bottom">
-            <input type="text" class="form-control" @keyup.prevent="search" v-model="query" />
+            <input type="text" class="form-control" @keyup="search" v-model="query" />
         </div>
         <br/>
-        <h4 class="center">Full-text search</h4>
-        <div class="input-group input-group-lg bottom">
-            <input type="text" class="form-control" @keyup.enter="searchFullText" v-model="queryFullText" />
-        </div>
         <div v-if="data && data.length > 0" class="data">
             <br />
             <hr class="red hr800" />
@@ -115,11 +111,18 @@ export default {
 
       return url
     },
-    search () {
+    search: function (event) {
       this.data = []
       if (this.query.length < 3) {
         return
       }
+      if (event.key === 'Enter') {
+        this.data = []
+        this.$router.push('/search/' + this.query + '/100')
+        this.query = ''
+        return
+      }
+
       let results = []
       const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/100/20'
 
@@ -147,15 +150,6 @@ export default {
           })
           self.data = results
         })
-    },
-    searchFullText () {
-      this.data = []
-      this.query = ''
-      if (this.queryFullText.length < 3) {
-        return
-      }
-      this.$router.push('/search/' + this.queryFullText + '/100')
-      this.queryFullText = ''
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
