@@ -44,10 +44,10 @@
                 <div class="div-img"><a :href="value.img_url" target="_blank"><img :src="value.img_url"
                             class="thumb" /></a></div>
                 <div class="div-value">
-                    <h5><a href="#" class="rot" @click="clearData(value.url)">{{value.name}}</a></h5>
+                    <h5><a href="#" class="rot" @click="clearData(value.url + '/100')">{{value.name}}</a></h5>
                     <h6 class="blue" v-html="value.description"></h6>
                     <template v-for="cathash in catshashes(value.keywords)">
-                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash)"
+                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash + '/100')"
                             v-bind:key="cathash">{{ cathash }}</a>
                     </template>
                 </div>
@@ -77,7 +77,8 @@ export default {
       years: [],
       queryFullText: '',
       data: [],
-      videos: []
+      videos: [],
+      result: []
     }
   },
   methods: {
@@ -120,28 +121,32 @@ export default {
         return
       }
       let results = []
-      this.videos.forEach(element => {
-        let str, n
-        let result = {
-          keywords: '',
-          name: '',
-          url: '',
-          img_url: '',
-          description: ''
-        }
+      const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/100/20'
 
-        str = element.name
-        n = str.toLowerCase().indexOf(this.query)
-        if (n >= 0) {
-          result.keywords = element.imdb.genre
-          result.name = element.name
-          result.description = element.imdb.arrayPlotSummary[0].text.indexOf('It looks like') === -1 ? element.imdb.arrayPlotSummary[0].text : ''
-          result.url = encodeURI('/movie/' + element.name)
-          result.img_url = element.imdb.poster === '' ? '/static/default.png' : element.imdb.poster
-          results.push(result)
-        }
-      })
-      this.data = results
+      let self = this
+      this.$axios
+        .get(dataURL)
+        .then(function (response) {
+          self.result = response.data.result
+
+          self.result.forEach(element => {
+            let result = {
+              keywords: '',
+              name: '',
+              url: '',
+              img_url: '',
+              description: ''
+            }
+
+            result.keywords = element.imdb.genre
+            result.name = element.name
+            result.description = element.imdb.arrayPlotSummary[0].text.indexOf('It looks like') === -1 ? element.imdb.arrayPlotSummary[0].text : ''
+            result.url = encodeURI('/movie/' + element.name)
+            result.img_url = element.imdb.poster === '' ? '/static/default.png' : element.imdb.poster
+            results.push(result)
+          })
+          self.data = results
+        })
     },
     searchFullText () {
       this.data = []
@@ -154,15 +159,9 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.$route.params.search + '/page/100/100'
     const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/100/100'
     let self = this
 
-    this.$axios
-      .get(dataURL)
-      .then(function (response) {
-        self.videos = response.data.result
-      })
     this.$axios
       .get(yearURL)
       .then(function (response) {
