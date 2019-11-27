@@ -1,17 +1,22 @@
 <template>
     <div class="mainblock">
         <h1 class="red">{{ message }}</h1>
-        <h3 class="red">{{ this.videos.length }} results found</h3>
-        <div class="white left-align data" v-if="videos && this.videos.length > 0">
+        <h3 class="red">{{ count }} results found</h3>
+        <div class="white left-align data" v-if="videos && videos.length > 0">
+            <hr class="red hr800" />
+            <div v-if="count > 0" style="display: block; text-align: center;">
+                <router-link v-for="n in Math.round(count / 100)" v-bind:key="n" :to="'/year/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
+            </div>
+            <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <a :href="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
+                    <router-link :to="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
                         <div>
-                            <img class="article_poster" :src="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
+                            <img class="article_poster" width="210" height="auto" :src="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
-                    </a>
+                    </router-link>
                 </div>
                 <div v-if="movie.title !== undefined && movie.title !== ''" lass="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
@@ -19,7 +24,7 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <a :href="'#/movie/' + movie.name" class="red">{{ movie.titleYear }}</a>&nbsp;(<a :href="'#/year/' + movie.title.substring(1, movie.title.length-1)" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</a>)
+                                        <router-link :to="'/movie/' + movie.name + '/100'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/100'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
                                     </h2>
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
@@ -44,8 +49,8 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
-                                    <h5 class="white"><a class="white"
-                                            :href="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</a> /
+                                    <h5 class="white"><router-link class="white"
+                                            :to="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</router-link> /
                                         {{ movie.imdb.count }} total</h5>
                                 </div>
                             </div>
@@ -68,8 +73,8 @@
                         <div>
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<a class="yellow" :href="'#/genre/' + cathash + ''" v-bind:key="cathash">
-                                    #{{ cathash }}</a>
+                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/100'" v-bind:key="cathash">
+                                    #{{ cathash }}</router-link>
                             </template>
                         </div>
                     </div>
@@ -198,6 +203,10 @@
                 <vue-disqus shortname="centralbrainz" :identifier="message" :url="urlCalc"></vue-disqus>
             </div>
             <hr class="red hr800" />
+            <div v-if="count > 0" style="display: block; text-align: center;">
+                <router-link v-for="n in Math.round(count / 100)" v-bind:key="n" :to="'/movie/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
+            </div>
+            <hr class="red hr800" />
             <div class="brain-container">
                 <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
             </div>
@@ -231,12 +240,22 @@ export default {
   },
   watch: {
     '$route.params.name': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/100/100'
+      const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/' + this.$route.params.page + '/100'
       this.$axios
         .get(dataURL)
-        .then(response => (
-          this.videos = response.data
-        ))
+        .then(response => {
+          this.videos = response.data.result
+          this.count = response.data.count
+        })
+    },
+    '$route.params.page': function (id) {
+      const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/' + this.$route.params.page + '/100'
+      this.$axios
+        .get(dataURL)
+        .then(response => {
+          this.videos = response.data.result
+          this.count = response.data.count
+        })
     }
   },
   methods: {
@@ -290,17 +309,20 @@ export default {
     },
     urlCalc () {
       return window.location.href
+    },
+    mainParam () {
+      return this.$route.params.name
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/100/100'
+    const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/' + this.$route.params.page + '/100'
     console.log(dataURL)
     this.$axios
       .get(dataURL)
-      .then(response => (
-        // console.log(response)
-        this.videos = response.data
-      ))
+      .then(response => {
+        this.videos = response.data.result
+        this.count = response.data.count
+      })
   }
 }
 </script>

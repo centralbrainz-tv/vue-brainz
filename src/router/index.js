@@ -12,32 +12,32 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/:page',
       name: 'Main',
       component: Movies
     },
     {
-      path: '/movie/:name',
+      path: '/movie/:name/:page',
       name: 'Movie',
       component: Movie
     },
     {
-      path: '/genre/:genre',
+      path: '/genre/:genre/:page',
       name: 'Genre',
       component: Genre
     },
     {
-      path: '/rating/:rating',
+      path: '/rating/:rating/:page',
       name: 'Rating',
       component: Rating
     },
     {
-      path: '/search/:search',
+      path: '/search/:search/:page',
       name: 'Search',
       component: Search
     },
     {
-      path: '/year/:year',
+      path: '/year/:year/:page',
       name: 'Year',
       component: Year
     }

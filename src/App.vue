@@ -60,7 +60,7 @@
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <div v-if="years && years.length > 0" style="display: block;">
-          <a :href="'#/year/' + year.substr(1, year.length - 2)"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </a>
+          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/100'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -88,7 +88,7 @@ export default {
       })
     },
     setRating: function (rating) {
-      this.$router.push('/rating/' + rating)
+      this.$router.push('/rating/' + rating + '/100')
     },
     clearData (url) {
       this.$router.push(url)
@@ -149,7 +149,7 @@ export default {
       if (this.queryFullText.length < 3) {
         return
       }
-      this.$router.push('/search/' + this.queryFullText)
+      this.$router.push('/search/' + this.queryFullText + '/100')
       this.queryFullText = ''
     }
   },
@@ -161,12 +161,12 @@ export default {
     this.$axios
       .get(dataURL)
       .then(function (response) {
-        self.videos = response.data
+        self.videos = response.data.result
       })
     this.$axios
       .get(yearURL)
       .then(function (response) {
-        self.years = response.data
+        self.years = response.data.result
       })
   }
 }
