@@ -5,7 +5,7 @@
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100)" v-bind:key="n" :to="'/year/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
+                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
@@ -95,11 +95,11 @@
             </div><br>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
+                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div class="brain-container">
-                <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
+                <img class="flip" width="320" height="auto" src="/static/centralbrainz.webp" />
             </div>
         </div>
     </div>

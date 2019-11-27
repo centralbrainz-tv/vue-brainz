@@ -2,7 +2,7 @@
     <div id="app">
         <h1 class="rot">CENTRAL BRAIN Z</h1>
         <h2 class="white">Horror Movie Database</h2>
-        <img width="320" height="auto" src="/static/centralbrainz.png" />
+        <img width="320" height="auto" src="/static/centralbrainz.webp" />
         <br>
         <hr class="red hr800" />
         <div class="links">

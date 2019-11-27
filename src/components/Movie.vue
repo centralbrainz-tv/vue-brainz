@@ -3,11 +3,6 @@
         <h1 class="red">{{ message }}</h1>
         <h3 class="red">{{ count }} results found</h3>
         <div class="white left-align data" v-if="videos && videos.length > 0">
-            <hr class="red hr800" />
-            <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100)" v-bind:key="n" :to="'/year/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
-            </div>
-            <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
@@ -156,7 +151,6 @@
                             <div v-html="obj.text.indexOf('It looks like') === -1 ? obj.text : ''"></div>
                         </div>
                     </div>
-<!---->
                     <div v-if="(movie.imdb.trivias.text.length > 0)" class="row row-sub countdown-item-details" style="flex-wrap: wrap!important;">
                         <span class="red" v-html="movie.imdb.trivias.name + ': '"></span>
                         <div v-for="(obj, index) in (movie.imdb.trivias.text.length > 0 ? movie.imdb.trivias.text : [])" v-bind:key="index"  v-html="obj.indexOf('It looks like') === -1 ? obj : ''">
@@ -200,12 +194,8 @@
                 <vue-disqus shortname="centralbrainz" :identifier="message" :url="urlCalc"></vue-disqus>
             </div>
             <hr class="red hr800" />
-            <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100)" v-bind:key="n" :to="'/movie/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
-            </div>
-            <hr class="red hr800" />
             <div class="brain-container">
-                <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
+                <img class="flip" width="320" height="auto" src="/static/centralbrainz.webp" />
             </div>
         </div>
     </div>
