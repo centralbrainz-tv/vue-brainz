@@ -157,10 +157,9 @@
                         </div>
                     </div>
 <!---->
-                    <div v-for="(obj, index) in (movie.imdb.trivias.text.length > 0 ? movie.imdb.trivias.text : [])" v-bind:key="index" class="row row-sub countdown-item-details">
-                        <div>
-                            <span class="red" v-html="movie.imdb.trivias.name + ': '"></span>
-                            <div v-html="obj.indexOf('It looks like') === -1 ? obj : ''"></div>
+                    <div v-if="(movie.imdb.trivias.text.length > 0)" class="row row-sub countdown-item-details" style="flex-wrap: wrap!important;">
+                        <span class="red" v-html="movie.imdb.trivias.name + ': '"></span>
+                        <div v-for="(obj, index) in (movie.imdb.trivias.text.length > 0 ? movie.imdb.trivias.text : [])" v-bind:key="index"  v-html="obj.indexOf('It looks like') === -1 ? obj : ''">
                         </div>
                     </div>
                     <div v-for="(obj, index) in (movie.imdb.AV.text.length > 0 ? movie.imdb.AV.text : [])" v-bind:key="index" class="row row-sub countdown-item-details">
@@ -181,16 +180,14 @@
                             <div v-html="obj.indexOf('It looks like') === -1 ? obj : ''"></div>
                         </div>
                     </div>
-                    <div v-for="(obj, index) in (movie.imdb.goofs.text.length > 0 ? movie.imdb.goofs.text : [])" v-bind:key="index" class="row row-sub countdown-item-details">
-                        <div>
-                            <span class="red" v-html="movie.imdb.goofs.name + ': '"></span>
-                            <div v-html="obj.indexOf('It looks like') === -1 ? obj : ''"></div>
+                    <div v-if="(movie.imdb.quotes.text.length > 0)" class="row row-sub countdown-item-details" style="flex-wrap: wrap!important;">
+                        <span class="red" v-html="movie.imdb.quotes.name + ': '"></span>
+                        <div v-for="(obj, index) in (movie.imdb.quotes.text.length > 0 ? movie.imdb.quotes.text : [])" v-bind:key="index" v-html="obj.indexOf('It looks like') === -1 ? obj : ''">
                         </div>
                     </div>
-                    <div v-for="(obj, index) in (movie.imdb.quotes.text.length > 0 ? movie.imdb.quotes.text : [])" v-bind:key="index" class="row row-sub countdown-item-details">
-                        <div>
-                            <span class="red" v-html="movie.imdb.quotes.name + ': '"></span>
-                            <div v-html="obj.indexOf('It looks like') === -1 ? obj : ''"></div>
+                    <div v-if="(movie.imdb.goofs.text.length > 0)" class="row row-sub countdown-item-details" style="flex-wrap: wrap!important;">
+                        <span class="red" v-html="movie.imdb.goofs.name + ': '"></span>
+                        <div v-for="(obj, index) in (movie.imdb.goofs.text.length > 0 ? movie.imdb.goofs.text : [])" v-bind:key="index"  v-html="obj.indexOf('It looks like') === -1 ? obj : ''">
                         </div>
                     </div>
                 </div>
