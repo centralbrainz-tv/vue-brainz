@@ -357,7 +357,7 @@ body {
 }
 .col-sm-3 {
   flex: unset!important;
-  max-width: 240px!important;
+  max-width: 210px!important;
   padding-right: unset!important;
   padding-left: unset!important;
 }
