@@ -40,10 +40,10 @@
                 <div class="div-img"><a :href="value.img_url" target="_blank"><img :src="value.img_url"
                             class="thumb" /></a></div>
                 <div class="div-value">
-                    <h5><a href="#" class="rot" @click="clearData(value.url + '/100')">{{value.name}}</a></h5>
+                    <h5><a href="#" class="rot" @click="clearData(value.url + '/1')">{{value.name}}</a></h5>
                     <h6 class="blue" v-html="value.description"></h6>
                     <template v-for="cathash in catshashes(value.keywords)">
-                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash + '/100')"
+                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash + '/1')"
                             v-bind:key="cathash">{{ cathash }}</a>
                     </template>
                 </div>
@@ -56,7 +56,7 @@
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <div v-if="years && years.length > 0" style="display: block;">
-          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/100'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
+          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -124,7 +124,7 @@ export default {
       }
 
       let results = []
-      const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/100/20'
+      const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/1/20'
 
       let self = this
       this.$axios
@@ -153,7 +153,7 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/100/100'
+    const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/1/200'
     let self = this
 
     this.$axios

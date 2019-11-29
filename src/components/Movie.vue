@@ -19,7 +19,7 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <router-link :to="'/movie/' + movie.name + '/100'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/100'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
+                                        <router-link :to="'/movie/' + movie.name + '/1'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/1'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
                                     </h2>
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
@@ -68,7 +68,7 @@
                         <div>
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/100'" v-bind:key="cathash">
+                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/1'" v-bind:key="cathash">
                                     #{{ cathash }}</router-link>
                             </template>
                         </div>
@@ -227,7 +227,15 @@ export default {
   },
   watch: {
     '$route.params.name': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/' + this.$route.params.page + '/100'
+      const dataURL = 'https://centralbrainz.tv/php-service/movie/' +
+        this.$route.params.name +
+        '/page/' +
+        this.$route.params.page +
+        '/100/' +
+        this.sortBy +
+        '/' +
+        this.sortDesc
+
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -236,7 +244,15 @@ export default {
         })
     },
     '$route.params.page': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/' + this.$route.params.page + '/100'
+      const dataURL = 'https://centralbrainz.tv/php-service/movie/' +
+        this.$route.params.name +
+        '/page/' +
+        this.$route.params.page +
+        '/100/' +
+        this.sortBy +
+        '/' +
+        this.sortDesc
+
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -302,8 +318,15 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/movie/' + this.$route.params.name + '/page/' + this.$route.params.page + '/100'
-    console.log(dataURL)
+    const dataURL = 'https://centralbrainz.tv/php-service/movie/' +
+      this.$route.params.name +
+      '/page/' +
+      this.$route.params.page +
+      '/100/' +
+      this.sortBy +
+      '/' +
+      this.sortDesc
+
     this.$axios
       .get(dataURL)
       .then(response => {
@@ -315,8 +338,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  #disqus_thread {
-    width: 100%;
-  }
-</style>
+<style scoped>#disqus_thread{width:100%;}</style>

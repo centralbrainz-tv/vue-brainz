@@ -5,7 +5,7 @@
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/fulltext/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
+                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/fulltext/' + mainParam + '/' + n">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
@@ -24,7 +24,7 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <router-link :to="'/movie/' + movie.name + '/100'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/100'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
+                                        <router-link :to="'/movie/' + movie.name + '/1'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/1'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
                                     </h2>
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
@@ -82,7 +82,7 @@
                         <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/100'" v-bind:key="cathash">
+                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/1'" v-bind:key="cathash">
                                     #{{ cathash }}</router-link>
                             </template>
                         </div>
@@ -95,7 +95,7 @@
             </div><br>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/year/' + mainParam + '/' + n * 100 + '/'">{{  n  }} </router-link>
+                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/year/' + mainParam + '/' + n">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div class="brain-container">
@@ -130,7 +130,15 @@ export default {
   },
   watch: {
     '$route.params.search': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/fulltext/' + this.$route.params.search + '/page/' + this.$route.params.page + '/100'
+      const dataURL = 'https://centralbrainz.tv/php-service/fulltext/' +
+        this.$route.params.search +
+        '/page/' +
+        this.$route.params.page +
+        '/100/' +
+        this.sortBy +
+        '/' +
+        this.sortDesc
+
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -139,7 +147,15 @@ export default {
         })
     },
     '$route.params.page': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/fulltext/' + this.$route.params.search + '/page/' + this.$route.params.page + '/100'
+      const dataURL = 'https://centralbrainz.tv/php-service/fulltext/' +
+        this.$route.params.search +
+        '/page/' +
+        this.$route.params.page +
+        '/100/' +
+        this.sortBy +
+        '/' +
+        this.sortDesc
+
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -214,7 +230,15 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/fulltext/' + this.$route.params.search + '/page/' + this.$route.params.page + '/100'
+    const dataURL = 'https://centralbrainz.tv/php-service/fulltext/' +
+      this.$route.params.search +
+      '/page/' +
+      this.$route.params.page +
+      '/100/' +
+      this.sortBy +
+      '/' +
+      this.sortDesc
+
     this.$axios
       .get(dataURL)
       .then(response => {
