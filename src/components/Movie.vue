@@ -127,10 +127,9 @@
                             <div v-html="obj.text.indexOf('It looks like') === -1 ? obj.text : ''"></div>
                         </div>
                     </div>
-                    <div v-for="(obj, index) in ((movie.imdb.arrayTaglines.length > 0 && movie.imdb.arrayTaglines[0].text !== '') ? movie.imdb.arrayTaglines : [])" v-bind:key="index" class="row row-sub countdown-item-details">
-                        <div>
-                            <span class="red" v-html="obj.name + ': '"></span>
-                            <div v-html="obj.text.indexOf('It looks like') === -1 ? obj.text : ''"></div>
+                    <div v-if="(movie.imdb.arrayTaglines.length > 0 && movie.imdb.arrayTaglines[0].text !== '')" class="row row-sub countdown-item-details" style="flex-wrap: wrap!important;">
+                        <span class="red" v-html="movie.imdb.arrayTaglines[0].name + ': '"></span>
+                        <div v-for="(obj, index) in ((movie.imdb.arrayTaglines.length > 0 && movie.imdb.arrayTaglines[0].text !== '') ? movie.imdb.arrayTaglines : [])" v-bind:key="index"  v-html="obj.text.indexOf('It looks like') === -1 ? obj.text : ''">
                         </div>
                     </div>
                     <div v-for="(obj, index) in movie.imdb.arrayAwards" v-bind:key="index" class="row row-sub countdown-item-details">
