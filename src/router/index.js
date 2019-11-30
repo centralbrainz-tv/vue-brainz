@@ -12,8 +12,13 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/:page',
-      name: 'Main',
+      path: '/',
+      redirect: '/index/1/count/0',
+      component: Movies
+    },
+    {
+      path: '/index/:page/:sort/:desc',
+      name: 'Main with Sorting',
       component: Movies
     },
     {
@@ -22,24 +27,24 @@ export default new Router({
       component: Movie
     },
     {
-      path: '/genre/:genre/:page',
-      name: 'Genre',
+      path: '/year/:year/:page/:sort/:desc',
+      name: 'Year with Sorting',
+      component: Year
+    },
+    {
+      path: '/genre/:genre/:page/:sort/:desc',
+      name: 'Genre with Sorting',
       component: Genre
     },
     {
-      path: '/rating/:rating/:page',
-      name: 'Rating',
+      path: '/rating/:rating/:page/:sort/:desc',
+      name: 'Rating with Sorting',
       component: Rating
     },
     {
-      path: '/search/:search/:page',
-      name: 'Search',
+      path: '/search/:search/:page/:sort/:desc',
+      name: 'Search with Sorting',
       component: Search
-    },
-    {
-      path: '/year/:year/:page',
-      name: 'Year',
-      component: Year
     }
   ]
 })

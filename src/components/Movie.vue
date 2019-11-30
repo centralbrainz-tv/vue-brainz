@@ -44,8 +44,8 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
-                                    <h5 class="white"><router-link class="white"
-                                            :to="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</router-link> /
+                                    <h5 class="white"><a class="white"
+                                            :href="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</a> /
                                         {{ movie.imdb.count }} total</h5>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                         <div>
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/1'" v-bind:key="cathash">
+                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/1/count/1'" v-bind:key="cathash">
                                     #{{ cathash }}</router-link>
                             </template>
                         </div>
@@ -185,24 +185,19 @@
                         </div>
                     </div>
                 </div>
-                <hr class="red hr800" />
-                <div class="brain-container" v-if="demon = calcDemon()">
-                    <img :src="demon.url" class="demon" :alt="demon.alt" :title="demon.alt" width="160" height="auto" />
-                </div>
             </div><br>
             <div class="row row-sub countdown-item disqus-row">
                 <vue-disqus shortname="centralbrainz" :identifier="message" :url="urlCalc"></vue-disqus>
             </div>
             <hr class="red hr800" />
             <div class="brain-container">
-                <img class="flip" width="320" height="auto" src="/static/centralbrainz.webp" />
+                <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import demonsJson from '../json/demons.json'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
 
@@ -220,9 +215,9 @@ export default {
   },
   data () {
     return {
-      demons: demonsJson,
       str: '<td class="release-date-item__attributes--empty" style="display: none;"></td>',
-      videos: []
+      videos: [],
+      count: 0
     }
   },
   watch: {
@@ -231,11 +226,7 @@ export default {
         this.$route.params.name +
         '/page/' +
         this.$route.params.page +
-        '/100/' +
-        this.sortBy +
-        '/' +
-        this.sortDesc
-
+        '/100/name/1'
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -248,10 +239,7 @@ export default {
         this.$route.params.name +
         '/page/' +
         this.$route.params.page +
-        '/100/' +
-        this.sortBy +
-        '/' +
-        this.sortDesc
+        '/100/name/1'
 
       this.$axios
         .get(dataURL)
@@ -262,23 +250,13 @@ export default {
     }
   },
   methods: {
-    jsonWithUrl (videos) {
-      let jsonOut = []
-      videos.forEach(item => {
-        let str = item.name
-        if (str === this.$route.params.name) {
-          jsonOut.push(item)
-        }
-      })
-      return jsonOut
-    },
     replace (str) {
       const strout = str.replace(/<[^/>][^>]*><\/[^>]+>/gim, '')
       return strout
     },
     catshashes (name) {
       let array = []
-      this.jsonWithUrl(this.videos).forEach(element => {
+      this.videos.forEach(element => {
         const str = element.name
         if (str === name) {
           let cats = element.imdb.genre.split(', ')
@@ -300,10 +278,6 @@ export default {
       url = url.substr(0, url.lastIndexOf('.'))
 
       return url
-    },
-    calcDemon () {
-      const rnd = Math.floor(Math.random() * this.demons.length)
-      return this.demons[rnd]
     }
   },
   computed: {
@@ -322,10 +296,8 @@ export default {
       this.$route.params.name +
       '/page/' +
       this.$route.params.page +
-      '/100/' +
-      this.sortBy +
-      '/' +
-      this.sortDesc
+      '/100/name/1'
+    this.count = 1
 
     this.$axios
       .get(dataURL)
@@ -336,6 +308,5 @@ export default {
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>#disqus_thread{width:100%;}</style>

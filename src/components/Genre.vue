@@ -4,8 +4,16 @@
         <h3 class="red">{{ count }} results found</h3>
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <hr class="red hr800" />
+            <div style="display: block; text-align: center;">
+                <span class="red">Sort By: </span>
+                <router-link :to="sortUrl + '/year/' + (sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
+                <router-link :to="sortUrl + '/name/' + (sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
+                <router-link :to="sortUrl + '/count/' + (sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
+                <router-link :to="sortUrl + '/rating/' + (sortDesc === '1' ? '0' : '1')">{{  'Rating ' + (sortBy === 'rating' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>
+            </div>
+            <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n">{{  n  }} </router-link>
+                <router-link v-for="n in Math.ceil(count / 100.0)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
@@ -49,8 +57,8 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">IMDB Rating: </span>
-                                    <h5 class="white"><router-link class="white"
-                                            :to="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</router-link> /
+                                    <h5 class="white"><a class="white"
+                                            :href="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</a> /
                                         {{ movie.imdb.count }} total</h5>
                                 </div>
                             </div>
@@ -82,34 +90,30 @@
                         <div class="small-font">
                             <span class="red">Genre: </span>
                             <template v-for="cathash in catshashes(movie.name)">
-                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/1'" v-bind:key="cathash">
+                                &nbsp;<router-link class="yellow" :to="'/genre/' + cathash + '/1/count/1'" v-bind:key="cathash">
                                     #{{ cathash }}</router-link>
                             </template>
                         </div>
                     </div>
                 </div>
                 <hr class="red hr800" />
-                <div class="brain-container" v-if="demon = calcDemon()">
-                    <img :src="demon.url" class="demon" :alt="demon.alt" :title="demon.alt" width="160" height="auto" />
-                </div>
+
             </div><br>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.round(count / 100) - 1" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n">{{  n  }} </router-link>
+                <router-link v-for="n in Math.ceil(count / 100.0)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div class="brain-container">
-                <img class="flip" width="320" height="auto" src="/static/centralbrainz.webp" />
+                <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import demonsJson from '../json/demons.json'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
-
 Vue.use(VueClipboard)
 
 export default {
@@ -124,8 +128,8 @@ export default {
   },
   data () {
     return {
-      demons: demonsJson,
-      videos: []
+      videos: [],
+      count: 0
     }
   },
   watch: {
@@ -138,7 +142,6 @@ export default {
         this.sortBy +
         '/' +
         this.sortDesc
-
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -155,7 +158,38 @@ export default {
         this.sortBy +
         '/' +
         this.sortDesc
-
+      this.$axios
+        .get(dataURL)
+        .then(response => {
+          this.videos = response.data.result
+          this.count = response.data.count
+        })
+    },
+    '$route.params.sort': function (id) {
+      const dataURL = 'https://centralbrainz.tv/php-service/genre/' +
+        this.$route.params.genre +
+        '/page/' +
+        this.$route.params.page +
+        '/100/' +
+        this.sortBy +
+        '/' +
+        this.sortDesc
+      this.$axios
+        .get(dataURL)
+        .then(response => {
+          this.videos = response.data.result
+          this.count = response.data.count
+        })
+    },
+    '$route.params.desc': function (id) {
+      const dataURL = 'https://centralbrainz.tv/php-service/genre/' +
+        this.$route.params.genre +
+        '/page/' +
+        this.$route.params.page +
+        '/100/' +
+        this.sortBy +
+        '/' +
+        this.sortDesc
       this.$axios
         .get(dataURL)
         .then(response => {
@@ -165,23 +199,9 @@ export default {
     }
   },
   methods: {
-    jsonWithUrl (videos) {
-      let jsonOut = []
-      videos.forEach(item => {
-        const array1 = item.imdb.genre.split(', ')
-        const array2 = this.$route.params.genre.split(', ')
-        const arrayn = array1.filter(function (n) {
-          return array2.indexOf(n) !== -1
-        })
-        if (arrayn.length > 0) {
-          jsonOut.push(item)
-        }
-      })
-      return jsonOut
-    },
     catshashes (name) {
       let array = []
-      this.jsonWithUrl(this.videos).forEach(element => {
+      this.videos.forEach(element => {
         const str = element.name
         if (str === name) {
           let cats = element.imdb.genre.split(', ')
@@ -203,16 +223,6 @@ export default {
       url = url.substr(0, url.lastIndexOf('.'))
 
       return url
-    },
-    calcDemon () {
-      const rnd = Math.floor(Math.random() * this.demons.length)
-      return this.demons[rnd]
-    },
-    sortByKey (array, key, reversed = 1) {
-      return array.sort(function (a, b) {
-        var x = a[key]; var y = b[key]
-        return ((x < y) ? (1 * reversed) : ((x > y) ? (-1 * reversed) : 0))
-      })
     }
   },
   computed: {
@@ -224,6 +234,18 @@ export default {
     },
     mainParam () {
       return this.$route.params.genre
+    },
+    sortUrl () {
+      return '/genre/' +
+        this.$route.params.genre +
+        '/' +
+        this.$route.params.page
+    },
+    sortDesc () {
+      return this.$route.params.desc
+    },
+    sortBy () {
+      return this.$route.params.sort
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
@@ -245,7 +267,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

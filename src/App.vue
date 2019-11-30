@@ -2,7 +2,7 @@
     <div id="app">
         <h1 class="rot">CENTRAL BRAIN Z</h1>
         <h2 class="white">Horror Movie Database</h2>
-        <img width="320" height="auto" src="/static/centralbrainz.webp" />
+        <img width="320" height="auto" src="/static/centralbrainz.png" />
         <br>
         <hr class="red hr800" />
         <div class="links">
@@ -43,7 +43,7 @@
                     <h5><a href="#" class="rot" @click="clearData(value.url + '/1')">{{value.name}}</a></h5>
                     <h6 class="blue" v-html="value.description"></h6>
                     <template v-for="cathash in catshashes(value.keywords)">
-                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash + '/1')"
+                        &nbsp; <a href="#" class="yellow" @click="clearData('/genre/' + cathash + '/1/rating/1')"
                             v-bind:key="cathash">{{ cathash }}</a>
                     </template>
                 </div>
@@ -56,7 +56,7 @@
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <div v-if="years && years.length > 0" style="display: block;">
-          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
+          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1/name/1'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -74,6 +74,7 @@ export default {
       queryFullText: '',
       data: [],
       videos: [],
+      count: 0,
       result: []
     }
   },
@@ -85,7 +86,7 @@ export default {
       })
     },
     setRating: function (rating) {
-      this.$router.push('/rating/' + rating + '/100')
+      this.$router.push('/rating/' + rating + '/1/rating/1')
     },
     clearData (url) {
       this.$router.push(url)
@@ -118,7 +119,7 @@ export default {
       }
       if (event.key === 'Enter') {
         this.data = []
-        this.$router.push('/search/' + this.query + '/100')
+        this.$router.push('/search/' + this.query + '/1/count/0')
         this.query = ''
         return
       }
