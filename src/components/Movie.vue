@@ -45,7 +45,7 @@
                                 <div>
                                     <span class="red">IMDB Rating: </span>
                                     <h5 class="white"><a class="white"
-                                            :href="movie.imdb.url + '/ratings'">{{ movie.imdb.rating }}</a> /
+                                            :href="movie.imdb.url + 'ratings'">{{ movie.imdb.rating }}</a> /
                                         {{ movie.imdb.count }} total</h5>
                                 </div>
                             </div>
