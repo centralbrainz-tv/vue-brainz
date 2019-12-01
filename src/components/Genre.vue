@@ -13,7 +13,7 @@
             </div>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.ceil(count / 100.0)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
+                <router-link v-for="n in Math.ceil(count / 20.0)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
@@ -101,7 +101,7 @@
             </div><br>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.ceil(count / 100.0)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
+                <router-link v-for="n in Math.ceil(count / 20.0)" v-bind:key="n" :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div class="brain-container">
@@ -138,7 +138,7 @@ export default {
         this.$route.params.genre +
         '/page/' +
         this.$route.params.page +
-        '/100/' +
+        '/20/' +
         this.sortBy +
         '/' +
         this.sortDesc
@@ -154,7 +154,7 @@ export default {
         this.$route.params.genre +
         '/page/' +
         this.$route.params.page +
-        '/100/' +
+        '/20/' +
         this.sortBy +
         '/' +
         this.sortDesc
@@ -170,7 +170,7 @@ export default {
         this.$route.params.genre +
         '/page/' +
         this.$route.params.page +
-        '/100/' +
+        '/20/' +
         this.sortBy +
         '/' +
         this.sortDesc
@@ -186,7 +186,7 @@ export default {
         this.$route.params.genre +
         '/page/' +
         this.$route.params.page +
-        '/100/' +
+        '/20/' +
         this.sortBy +
         '/' +
         this.sortDesc
@@ -253,7 +253,7 @@ export default {
       this.$route.params.genre +
       '/page/' +
       this.$route.params.page +
-      '/100/' +
+      '/20/' +
       this.sortBy +
       '/' +
       this.sortDesc
