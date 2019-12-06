@@ -6,14 +6,14 @@
             <hr class="red hr800" />
             <div style="display: block; text-align: center;">
                 <span class="red">Sort By: </span>
-                <router-link :to="sortUrl + '/year/' + (sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
-                <router-link :to="sortUrl + '/name/' + (sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
-                <router-link :to="sortUrl + '/count/' + (sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
+                <router-link :to="sortUrl + '/year/' + (sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/name/' + (sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/count/' + (sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
                 <router-link :to="sortUrl + '/rating/' + (sortDesc === '1' ? '0' : '1')">{{  'Rating ' + (sortBy === 'rating' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>
             </div>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.ceil(count / 20.0)" v-bind:key="n" :to="'/index/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
+                <router-link v-for="n in Math.ceil(count / 20.0)" v-bind:key="n" :to="'/index/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
@@ -69,9 +69,8 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Aggregate median rating: </span>
-                                    <star-rating inactive-color="white" active-color="red" :increment="0.01"
-                                        :rating="(movie.imdb.rating * 10.0) / 10.0"
-                                        :fixed-points="2" :max-rating="10" :star-size="20" :border-width="1"
+                                    <star-rating inactive-color="black" active-color="red"
+                                        :rating="(movie.imdb.rating * 10.0) / 10.0" :max-rating="10" :border-width="4" :increment="0.01" :fixed-points="2" :star-size="20"
                                         border-color="red" :read-only="true"></star-rating>
                                 </div>
                             </div>
@@ -101,7 +100,7 @@
             </div><br>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
-                <router-link v-for="n in Math.ceil(count / 20.0)" v-bind:key="n" :to="'/index/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
+                <router-link v-for="n in Math.ceil(count / 20.0)" v-bind:key="n" :to="'/index/' + n + '/' + sortBy + '/' + sortDesc">{{  n  }} </router-link>
             </div>
             <hr class="red hr800" />
             <div class="brain-container">
@@ -135,7 +134,8 @@ export default {
   },
   watch: {
     '$route.params.page': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/index/index/page/' +
+      console.log(this.$baseurl)
+      const dataURL = this.$baseurl + 'php-service/index/index/page/' +
         (this.$route.params.page ? this.$route.params.page : '1') +
         '/20/' +
         this.sortBy +
@@ -149,7 +149,8 @@ export default {
         })
     },
     '$route.params.sort': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/index/index/page/' +
+      console.log(this.$baseurl)
+      const dataURL = this.$baseurl + 'php-service/index/index/page/' +
         (this.$route.params.page ? this.$route.params.page : '1') +
         '/20/' +
         this.sortBy +
@@ -163,7 +164,8 @@ export default {
         })
     },
     '$route.params.desc': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/index/index/page/' +
+      console.log(this.$baseurl)
+      const dataURL = this.$baseurl + 'php-service/index/index/page/' +
         (this.$route.params.page ? this.$route.params.page : '1') +
         '/20/' +
         this.sortBy +
@@ -211,11 +213,8 @@ export default {
     urlCalc () {
       return window.location.href
     },
-    mainParam () {
-      return 'index'
-    },
     sortUrl () {
-      return '/index/index/' + this.$route.params.page
+      return '/index/' + this.$route.params.page
     },
     sortDesc () {
       return this.$route.params.desc
@@ -225,7 +224,7 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/index/index/page/' +
+    const dataURL = this.$baseurl + 'php-service/index/index/page/' +
       (this.$route.params.page ? this.$route.params.page : '1') +
       '/20/' +
       this.sortBy +

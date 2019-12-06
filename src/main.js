@@ -15,6 +15,9 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.component('star-rating', StarRating)
 Vue.use(VueDisqus)
+
+Vue.prototype.$baseurl = 'https://centralbrainz.tv/'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -56,7 +56,7 @@
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <div v-if="years && years.length > 0" style="display: block;">
-          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1/name/1'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
+          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1/rating/0'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -125,7 +125,7 @@ export default {
       }
 
       let results = []
-      const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/1/20/name/1'
+      const dataURL = this.$baseurl + 'php-service/search/' + this.query + '/page/1/20/name/1'
 
       let self = this
       this.$axios
@@ -154,7 +154,7 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/1/200/name/1'
+    const yearURL = this.$baseurl + 'php-service/years/index/page/1/200/name/1'
     let self = this
 
     this.$axios

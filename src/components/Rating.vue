@@ -6,9 +6,9 @@
             <hr class="red hr800" />
             <div style="display: block; text-align: center;">
                 <span class="red">Sort By: </span>
-                <router-link :to="sortUrl + '/year/' + (sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
-                <router-link :to="sortUrl + '/name/' + (sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
-                <router-link :to="sortUrl + '/count/' + (sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }} | </router-link>
+                <router-link :to="sortUrl + '/year/' + (sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/name/' + (sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/count/' + (sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
                 <router-link :to="sortUrl + '/rating/' + (sortDesc === '1' ? '0' : '1')">{{  'Rating ' + (sortBy === 'rating' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>
             </div>
             <hr class="red hr800" />
@@ -69,9 +69,8 @@
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <span class="red">Aggregate median rating: </span>
-                                    <star-rating inactive-color="white" active-color="red" :increment="0.01"
-                                        :rating="(movie.imdb.rating * 10.0) / 10.0"
-                                        :fixed-points="2" :max-rating="10" :star-size="20" :border-width="1"
+                                    <star-rating inactive-color="black" active-color="red"
+                                        :rating="(movie.imdb.rating * 10.0) / 10.0" :max-rating="10" :border-width="4" :increment="0.01" :fixed-points="2" :star-size="20"
                                         border-color="red" :read-only="true"></star-rating>
                                 </div>
                             </div>
@@ -128,7 +127,7 @@ export default {
   },
   watch: {
     '$route.params.rating': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/rating/' +
+      const dataURL = this.$baseurl + 'php-service/rating/' +
         this.$route.params.rating +
         '/page/' +
         this.$route.params.page +
@@ -144,7 +143,7 @@ export default {
         })
     },
     '$route.params.page': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/rating/' +
+      const dataURL = this.$baseurl + 'php-service/rating/' +
         this.$route.params.rating +
         '/page/' +
         this.$route.params.page +
@@ -160,7 +159,7 @@ export default {
         })
     },
     '$route.params.sort': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/rating/' +
+      const dataURL = this.$baseurl + 'php-service/rating/' +
         this.$route.params.rating +
         '/page/' +
         this.$route.params.page +
@@ -176,7 +175,7 @@ export default {
         })
     },
     '$route.params.desc': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/rating/' +
+      const dataURL = this.$baseurl + 'php-service/rating/' +
         this.$route.params.rating +
         '/page/' +
         this.$route.params.page +
@@ -250,7 +249,7 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/rating/' +
+    const dataURL = this.$baseurl + 'php-service/rating/' +
       this.$route.params.rating +
       '/page/' +
       this.$route.params.page +

@@ -221,7 +221,7 @@ export default {
   },
   watch: {
     '$route.params.name': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/movie/' +
+      const dataURL = this.$baseurl + 'php-service/movie/' +
         this.$route.params.name +
         '/page/' +
         this.$route.params.page +
@@ -234,7 +234,7 @@ export default {
         })
     },
     '$route.params.page': function (id) {
-      const dataURL = 'https://centralbrainz.tv/php-service/movie/' +
+      const dataURL = this.$baseurl + 'php-service/movie/' +
         this.$route.params.name +
         '/page/' +
         this.$route.params.page +
@@ -291,7 +291,7 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const dataURL = 'https://centralbrainz.tv/php-service/movie/' +
+    const dataURL = this.$baseurl + 'php-service/movie/' +
       this.$route.params.name +
       '/page/' +
       this.$route.params.page +
