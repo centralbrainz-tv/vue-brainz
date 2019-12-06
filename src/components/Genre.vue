@@ -5,6 +5,7 @@
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <hr class="red hr800" />
             <div style="display: block; text-align: center;">
+                <span class="red">Current Page: </span>{{  $route.params.page  }}<br/>
                 <span class="red">Sorted By: </span>{{  sortBy + (sortDesc === '1' ? ' descending' : ' ascending')  }}<br/>
                 <span class="red">Sort By: </span>
                 <router-link :to="sortUrl + '/year/' + (sortBy === 'year' && sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
