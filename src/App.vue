@@ -125,7 +125,7 @@ export default {
       }
 
       let results = []
-      const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/1/20'
+      const dataURL = 'https://centralbrainz.tv/php-service/search/' + this.query + '/page/1/20/name/1'
 
       let self = this
       this.$axios
@@ -154,7 +154,7 @@ export default {
     }
   },
   mounted () { // when the Vue app is booted up, this is run automatically.
-    const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/1/200'
+    const yearURL = 'https://centralbrainz.tv/php-service/years/index/page/1/200/name/1'
     let self = this
 
     this.$axios

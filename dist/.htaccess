@@ -92,12 +92,9 @@
 </IfModule>
 <IfModule mod_headers.c>
   Header set Strict-Transport-Security "max-age=10886400; includeSubDomains; preload"
-  Header set Content-Security-Policy "default-src 'self'"
+  Header set Content-Security-Policy "default-src 'unsafe-inline' *;" 
   Header set Referrer-Policy: "no-referrer, strict-origin-when-cross-origin"
-  Header set Feature-Policy: "geolocation 'self'"
-  Header set Feature-Policy: "camera 'none'; microphone 'none'; animations 'none'; sync-xhr 'none'; sync-script 'none'; picture-in-picture 'none'; vertical-scroll 'none'; Feature-Policy: autoplay 'self'"
-  Feature-Policy: layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none';
-  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Frame-Options "ALLOWALL"
   Header always set X-Xss-Protection "1; mode=block"
   Header always set X-Content-Type-Options "nosniff"
 </IfModule>

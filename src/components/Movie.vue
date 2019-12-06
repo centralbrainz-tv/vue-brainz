@@ -6,20 +6,20 @@
             <div v-for="(movie) in videos" v-bind:key="movie.name" class="row countdown-item"
                 style="padding-left: 10px; width: 100%;">
                 <div class="col-sm-3 col-full-xs img-thumb">
-                    <router-link :to="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
+                    <router-link :to="movie.imdb !== null && movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
                         <div>
                             <img class="article_poster" width="210" height="auto" :src="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt="" sborder=""
                                 style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;">
                         </div>
                     </router-link>
                 </div>
-                <div v-if="movie.title !== undefined && movie.title !== ''" lass="col-78 col-full-xs countdown-item-content">
+                <div v-if="movie.title !== null && movie.title !== undefined && movie.title !== ''" lass="col-78 col-full-xs countdown-item-content">
                     <div class="row row-sub countdown-item-title-bar">
                         <div class="col-full-xs" style="height: 100%;">
                             <div class="article_movie_title" style="float: left;">
                                 <div>
                                     <h2>
-                                        <router-link :to="'/movie/' + movie.name + '/1'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/1'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
+                                        <router-link :to="'/movie/' + movie.name + '/1'" class="red">{{ movie.titleYear }}</router-link>&nbsp;(<router-link :to="'/year/' + movie.title.substring(1, movie.title.length-1) + '/1/count/0'" class="white">{{ movie.title.substring(1, movie.title.length-1) }}</router-link>)
                                     </h2>
                                     <span v-if="movie.rottenTomato" class="red">Tomato Meter: </span>
                                     <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% /
