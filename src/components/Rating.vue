@@ -5,11 +5,12 @@
         <div class="white left-align data" v-if="videos && videos.length > 0">
             <hr class="red hr800" />
             <div style="display: block; text-align: center;">
+                <span class="red">Sorted By: </span>{{  sortBy + (sortDesc === '1' ? ' ascending' : ' descending')  }}<br/>
                 <span class="red">Sort By: </span>
-                <router-link :to="sortUrl + '/year/' + (sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
-                <router-link :to="sortUrl + '/name/' + (sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
-                <router-link :to="sortUrl + '/count/' + (sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
-                <router-link :to="sortUrl + '/rating/' + (sortDesc === '1' ? '0' : '1')">{{  'Rating ' + (sortBy === 'rating' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>
+                <router-link :to="sortUrl + '/year/' + (sortBy === 'year' && sortDesc === '1' ? '0' : '1')">{{  'Year ' + (sortBy === 'year' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/name/' + (sortBy === 'name' && sortDesc === '1' ? '0' : '1')">{{  'Name ' + (sortBy === 'name' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/count/' + (sortBy === 'count' && sortDesc === '1' ? '0' : '1')">{{  'Count ' + (sortBy === 'count' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>&nbsp;|&nbsp;
+                <router-link :to="sortUrl + '/rating/' + (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')">{{  'Rating ' + (sortBy === 'rating' && sortDesc === '1' ? 'desc' : 'asc')  }}</router-link>
             </div>
             <hr class="red hr800" />
             <div v-if="count > 0" style="display: block; text-align: center;">
