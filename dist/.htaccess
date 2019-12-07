@@ -104,3 +104,4 @@
   Header always set Feature-Policy "accelerometer 'none';ambient-light-sensor 'none';autoplay 'none';battery 'none';camera 'none';display-capture 'none';display-capture 'none';document-domain 'none';encrypted-media 'none';"
   Header always set Feature-Policy "gyroscope 'none';magnetometer 'none';microphone 'none';midi 'none';payment 'none';picture-in-picture 'none';publickey-credentials 'none';speaker 'self';sync-xhr 'none';usb 'none' geolocation 'self';fullscreen 'self';wake-lock 'none';"
 </IfModule>
+AddType 'text/html; charset=UTF-8' html
