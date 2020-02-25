@@ -90,3 +90,19 @@
   BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   Header append Vary User-Agent
 </IfModule>
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=10886400; includeSubDomains; preload"
+  Header always set Expect-CT enforce,max-age=2592000,report-uri="https://centralbrainz.tv/#/contact/"
+  Header always set Content-Security-Policy "default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';"
+  Header always set Referrer-Policy: "no-referrer, strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "ALLOWALL"
+  Header always set X-Xss-Protection "1; mode=block"
+  Header always set Access-Control-Allow-Origin: https://horror-movies.best
+  Header always set Vary: Origin
+   # Disable server signature
+   ServerSignature Off
+  Header always set Server "BRAIN-Z"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Feature-Policy "accelerometer 'none';ambient-light-sensor 'none';autoplay 'none';battery 'none';camera 'none';display-capture 'none';display-capture 'none';document-domain 'none';encrypted-media 'none';"
+  Header always set Feature-Policy "gyroscope 'none';magnetometer 'none';microphone 'none';midi 'none';payment 'none';picture-in-picture 'none';publickey-credentials 'none';speaker 'self';sync-xhr 'none';usb 'none' geolocation 'self';fullscreen 'self';wake-lock 'none';"
+</IfModule>
