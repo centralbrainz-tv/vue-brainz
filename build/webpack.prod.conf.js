@@ -40,8 +40,26 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
+        toplevel: true,
+        ecma: 8,
         compress: {
-          warnings: false
+          warnings: false,
+          drop_console: true,
+          ecma: 8,
+          expression: true,
+          hoist_props: true,
+          passes: 10,
+          toplevel: true,
+          unsafe: true
+        },
+        output: {
+          beautify: false,
+          ecma: 8
+        },
+        mangle: {
+          safari10: true,
+          toplevel: true,
+          eval: true
         }
       },
       sourceMap: config.build.productionSourceMap,
@@ -76,7 +94,16 @@ const webpackConfig = merge(baseWebpackConfig, {
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
+        useShortDoctype: true,
+        collapseBooleanAttributes: true,
+        collapseInlineTagWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        removeOptionalTags: true,
+        removeRedundantAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
