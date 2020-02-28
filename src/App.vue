@@ -56,7 +56,7 @@
             border-color="red"></star-rating>
         <hr class="red hr800" />
         <div v-if="years && years.length > 0" style="display: block;">
-          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1/rating/0'"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
+          <router-link :to="'/year/' + year.substr(1, year.length - 2) + '/1/' + sortBy + '/'+ sortDesc + ''"  v-for="year in years" v-bind:key="year">{{  year.substr(1, year.length - 2)  }} </router-link>
         </div>
         <hr class="red hr800" />
         <router-view />
@@ -76,6 +76,14 @@ export default {
       videos: [],
       count: 0,
       result: []
+    }
+  },
+  computed: {
+    sortDesc () {
+      return this.$route.params.desc
+    },
+    sortBy () {
+      return this.$route.params.sort
     }
   },
   methods: {
