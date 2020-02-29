@@ -64,7 +64,7 @@
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
           :to="'/rating/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
-          >{{ n }}</router-link
+          >{{ n }}&#32;</router-link
         >
       </div>
       <hr class="red hr800" />
@@ -245,7 +245,7 @@
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
           :to="'/rating/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
-          >{{ n }}</router-link
+          >{{ n }}&#32;</router-link
         >
       </div>
       <hr class="red hr800" />
@@ -383,7 +383,6 @@ export default {
       this.sortBy +
       "/" +
       this.sortDesc;
-    console.log(dataURL);
     this.$axios.get(dataURL).then(response => {
       this.videos = response.data.result;
       this.count = response.data.count;

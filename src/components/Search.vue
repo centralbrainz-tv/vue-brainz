@@ -60,7 +60,7 @@
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
           :to="'/search/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
-          >{{ n }}</router-link
+          >{{ n }}&#32;</router-link
         >
       </div>
       <hr class="red hr800" />
@@ -240,7 +240,7 @@
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
           :to="'/search/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
-          >{{ n }}</router-link
+          >{{ n }}&#32;</router-link
         >
       </div>
       <hr class="red hr800" />

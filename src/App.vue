@@ -121,7 +121,7 @@
             sortDesc +
             ''
         "
-        >{{ year.substr(1, year.length - 2) }}</router-link
+        >&#183;&nbsp;{{ year.substr(1, year.length - 2) }}&#32;</router-link
       >
     </div>
     <hr class="red hr800" />
