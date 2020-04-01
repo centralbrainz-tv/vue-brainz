@@ -12,7 +12,8 @@
     "minify-html": "yarn html-minifier --case-sensitive --trim-custom-fragments --collapse-boolean-attributes --sort-class-name --sort-attributes --remove-tag-whitespace --remove-style-link-type-attributes --collapse-inline-tag-whitespace --remove-script-type-attributes --no-include-auto-generated-tags --remove-redundant-attributes --remove-optional-tags --remove-empty-elements --remove-empty-attributes --remove-comments --remove-attribute-quotes --collapse-whitespace --decode-entities --remove-tag-whitespace --use-short-doctype --process-scripts true --minify-css true --minify-js true  --minify-url true -o dist/index.html dist/index.html"
   },
   "dependencies": {
-    "acorn": "^5.7.3",
+    "acorn": "^7.1.1",
+    "minimist": "^1.2.2",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "eslint": "^5.16.0",
