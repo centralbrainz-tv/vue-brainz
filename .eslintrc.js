@@ -5,10 +5,12 @@ module.exports = {
     browser: true
   },
   extends: [
-    "plugin:prettier/recommended",
-    "eslint:recommended",
+    "plugin:vue/base",
+    "plugin:vue/essential",
+    "plugin:vue/strongly-recommended",
     "plugin:vue/recommended",
     "eslint:recommended",
+    "plugin:prettier/recommended",
     "prettier/vue"
   ],
   rules: {

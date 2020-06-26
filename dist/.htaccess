@@ -99,10 +99,12 @@
   Header always set X-Xss-Protection "1; mode=block"
   Header always set Access-Control-Allow-Origin: https://horror-movies.best
   Header always set Vary: Origin
-   # Disable server signature
-   ServerSignature Off
+  # Disable server signature
+  ServerSignature Off
+  AddCharset UTF-8 .html
   Header always set Server "BRAIN-Z"
   Header always set X-Content-Type-Options "nosniff"
   Header always set Feature-Policy "accelerometer 'none';ambient-light-sensor 'none';autoplay 'none';battery 'none';camera 'none';display-capture 'none';display-capture 'none';document-domain 'none';encrypted-media 'none';"
   Header always set Feature-Policy "gyroscope 'none';magnetometer 'none';microphone 'none';midi 'none';payment 'none';picture-in-picture 'none';publickey-credentials 'none';speaker 'self';sync-xhr 'none';usb 'none' geolocation 'self';fullscreen 'self';wake-lock 'none';"
 </IfModule>
+ErrorDocument 404 /static/404.html

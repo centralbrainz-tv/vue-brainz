@@ -1,10 +1,22 @@
 <template>
   <div class="mainblock">
-    <h1 class="red">{{ message }}</h1>
-    <h3 class="red">{{ count }} results found</h3>
+    <h4 class="red">{{ message }}</h4>
+    <h5 class="red">{{ count }} results found</h5>
+    <router-link
+      class="view-select"
+      :to="'/mosaic/' + sortPage + '/' + sortBy + '/' + sortDesc"
+    >
+      Mosaic
+    </router-link>
+    <router-link
+      class="view-select"
+      :to="'/index/' + sortPage + '/' + sortBy + '/' + sortDesc"
+    >
+      Classic
+    </router-link>
     <div v-if="videos && videos.length > 0" class="white left-align data">
       <hr class="red hr800" />
-      <div style="display: block; text-align: center;">
+      <div class="pages">
         <span class="red">Current Page:</span>
         {{ $route.params.page }}
         <br />
@@ -15,8 +27,8 @@
         <router-link
           :to="
             sortUrl +
-              '/year/' +
-              (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
+            '/year/' +
+            (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -26,8 +38,8 @@
         <router-link
           :to="
             sortUrl +
-              '/name/' +
-              (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
+            '/name/' +
+            (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -37,8 +49,8 @@
         <router-link
           :to="
             sortUrl +
-              '/count/' +
-              (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
+            '/count/' +
+            (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -48,18 +60,18 @@
         <router-link
           :to="
             sortUrl +
-              '/rating/' +
-              (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
+            '/rating/' +
+            (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
             "Rating " +
-              (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
+            (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
           }}
         </router-link>
       </div>
       <hr class="red hr800" />
-      <div v-if="count > 0" style="display: block; text-align: center;">
+      <div v-if="count > 0" class="pages">
         <router-link
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
@@ -87,7 +99,7 @@
           >
             <div>
               <img
-                class="article_poster"
+                class="article_poster thumb-movie-img"
                 width="210"
                 height="auto"
                 :src="
@@ -97,7 +109,6 @@
                 "
                 alt
                 sborder
-                style="border-color: #EEEEEE; border-style: solid; border-width: 1px; width: 210px; height: auto;"
               />
             </div>
           </router-link>
@@ -105,8 +116,8 @@
         <div
           v-if="
             movie.title !== null &&
-              movie.title !== undefined &&
-              movie.title !== ''
+            movie.title !== undefined &&
+            movie.title !== ''
           "
           lass="col-78 col-full-xs countdown-item-content"
         >
@@ -123,8 +134,8 @@
                     <router-link
                       :to="
                         '/year/' +
-                          movie.title.substring(1, movie.title.length - 1) +
-                          '/1/count/0'
+                        movie.title.substring(1, movie.title.length - 1) +
+                        '/1/count/0'
                       "
                       class="white"
                     >
@@ -200,7 +211,7 @@
           <div
             v-if="
               movie.imdb.arrayPlotSummary.length > 0 &&
-                movie.imdb.arrayPlotSummary[0].text !== ''
+              movie.imdb.arrayPlotSummary[0].text !== ''
             "
             class="row row-sub countdown-item-details"
           >
@@ -240,7 +251,7 @@
       </div>
       <br />
       <hr class="red hr800" />
-      <div v-if="count > 0" style="display: block; text-align: center;">
+      <div v-if="count > 0" class="pages">
         <router-link
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
@@ -273,13 +284,13 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       videos: [],
-      count: 0
+      count: 0,
     };
   },
   computed: {
@@ -297,15 +308,18 @@ export default {
         "/genre/" + this.$route.params.genre + "/" + this.$route.params.page
       );
     },
+    sortPage() {
+      return this.$route.params.page;
+    },
     sortDesc() {
       return this.$route.params.desc;
     },
     sortBy() {
       return this.$route.params.sort;
-    }
+    },
   },
   watch: {
-    "$route.params.genre": function() {
+    "$route.params.genre": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -316,12 +330,12 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
+      this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.page": function() {
+    "$route.params.page": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -332,12 +346,12 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
+      this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.sort": function() {
+    "$route.params.sort": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -348,12 +362,12 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
+      this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.desc": function() {
+    "$route.params.desc": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -364,11 +378,11 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
+      this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
-    }
+    },
   },
   mounted() {
     // when the Vue app is booted up, this is run automatically.
@@ -383,7 +397,7 @@ export default {
       "/" +
       this.sortDesc;
 
-    this.$axios.get(dataURL).then(response => {
+    this.$axios.get(dataURL).then((response) => {
       this.videos = response.data.result;
       this.count = response.data.count;
     });
@@ -391,11 +405,11 @@ export default {
   methods: {
     catshashes(name) {
       let array = [];
-      this.videos.forEach(element => {
+      this.videos.forEach((element) => {
         const str = element.name;
         if (str === name) {
           let cats = element.imdb.genre.split(", ");
-          cats.forEach(cat => {
+          cats.forEach((cat) => {
             array.push(cat);
           });
         }
@@ -413,7 +427,7 @@ export default {
       url = url.substr(0, url.lastIndexOf("."));
 
       return url;
-    }
-  }
+    },
+  },
 };
 </script>
