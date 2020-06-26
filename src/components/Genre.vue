@@ -27,8 +27,8 @@
         <router-link
           :to="
             sortUrl +
-            '/year/' +
-            (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
+              '/year/' +
+              (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -38,8 +38,8 @@
         <router-link
           :to="
             sortUrl +
-            '/name/' +
-            (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
+              '/name/' +
+              (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -49,8 +49,8 @@
         <router-link
           :to="
             sortUrl +
-            '/count/' +
-            (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
+              '/count/' +
+              (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -60,13 +60,13 @@
         <router-link
           :to="
             sortUrl +
-            '/rating/' +
-            (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
+              '/rating/' +
+              (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
             "Rating " +
-            (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
+              (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
           }}
         </router-link>
       </div>
@@ -116,8 +116,8 @@
         <div
           v-if="
             movie.title !== null &&
-            movie.title !== undefined &&
-            movie.title !== ''
+              movie.title !== undefined &&
+              movie.title !== ''
           "
           lass="col-78 col-full-xs countdown-item-content"
         >
@@ -134,8 +134,8 @@
                     <router-link
                       :to="
                         '/year/' +
-                        movie.title.substring(1, movie.title.length - 1) +
-                        '/1/count/0'
+                          movie.title.substring(1, movie.title.length - 1) +
+                          '/1/count/0'
                       "
                       class="white"
                     >
@@ -211,7 +211,7 @@
           <div
             v-if="
               movie.imdb.arrayPlotSummary.length > 0 &&
-              movie.imdb.arrayPlotSummary[0].text !== ''
+                movie.imdb.arrayPlotSummary[0].text !== ''
             "
             class="row row-sub countdown-item-details"
           >
@@ -284,13 +284,13 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       videos: [],
-      count: 0,
+      count: 0
     };
   },
   computed: {
@@ -316,10 +316,10 @@ export default {
     },
     sortBy() {
       return this.$route.params.sort;
-    },
+    }
   },
   watch: {
-    "$route.params.genre": function () {
+    "$route.params.genre": function() {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -330,12 +330,12 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then((response) => {
+      this.$axios.get(dataURL).then(response => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.page": function () {
+    "$route.params.page": function() {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -346,12 +346,12 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then((response) => {
+      this.$axios.get(dataURL).then(response => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.sort": function () {
+    "$route.params.sort": function() {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -362,12 +362,12 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then((response) => {
+      this.$axios.get(dataURL).then(response => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.desc": function () {
+    "$route.params.desc": function() {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -378,11 +378,11 @@ export default {
         this.sortBy +
         "/" +
         this.sortDesc;
-      this.$axios.get(dataURL).then((response) => {
+      this.$axios.get(dataURL).then(response => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
-    },
+    }
   },
   mounted() {
     // when the Vue app is booted up, this is run automatically.
@@ -397,7 +397,7 @@ export default {
       "/" +
       this.sortDesc;
 
-    this.$axios.get(dataURL).then((response) => {
+    this.$axios.get(dataURL).then(response => {
       this.videos = response.data.result;
       this.count = response.data.count;
     });
@@ -405,11 +405,11 @@ export default {
   methods: {
     catshashes(name) {
       let array = [];
-      this.videos.forEach((element) => {
+      this.videos.forEach(element => {
         const str = element.name;
         if (str === name) {
           let cats = element.imdb.genre.split(", ");
-          cats.forEach((cat) => {
+          cats.forEach(cat => {
             array.push(cat);
           });
         }
@@ -427,7 +427,7 @@ export default {
       url = url.substr(0, url.lastIndexOf("."));
 
       return url;
-    },
-  },
+    }
+  }
 };
 </script>

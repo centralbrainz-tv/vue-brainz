@@ -15,42 +15,42 @@ export default new Router({
     {
       path: "/",
       redirect: "/mosaic/1/count/0",
-      component: Movies,
+      component: Movies
     },
     {
       path: "/mosaic/:page/:sort/:desc",
       name: "Mosaic with Sorting",
-      component: Mosaic,
+      component: Mosaic
     },
     {
       path: "/index/:page/:sort/:desc",
       name: "Main with Sorting",
-      component: Movies,
+      component: Movies
     },
     {
       path: "/movie/:name/:page",
       name: "Movie",
-      component: Movie,
+      component: Movie
     },
     {
       path: "/year/:year/:page/:sort/:desc",
       name: "Year with Sorting",
-      component: Year,
+      component: Year
     },
     {
       path: "/genre/:genre/:page/:sort/:desc",
       name: "Genre with Sorting",
-      component: Genre,
+      component: Genre
     },
     {
       path: "/rating/:rating/:page/:sort/:desc",
       name: "Rating with Sorting",
-      component: Rating,
+      component: Rating
     },
     {
       path: "/search/:search/:page/:sort/:desc",
       name: "Search with Sorting",
-      component: Search,
-    },
-  ],
+      component: Search
+    }
+  ]
 });

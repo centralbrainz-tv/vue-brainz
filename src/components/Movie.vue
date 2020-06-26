@@ -51,8 +51,8 @@
         <div
           v-if="
             movie.title !== null &&
-            movie.title !== undefined &&
-            movie.title !== ''
+              movie.title !== undefined &&
+              movie.title !== ''
           "
           lass="col-78 col-full-xs countdown-item-content"
         >
@@ -69,8 +69,8 @@
                     <router-link
                       :to="
                         '/year/' +
-                        movie.title.substring(1, movie.title.length - 1) +
-                        '/1/count/0'
+                          movie.title.substring(1, movie.title.length - 1) +
+                          '/1/count/0'
                       "
                       class="white"
                     >
@@ -180,7 +180,7 @@
           <div
             v-if="
               movie.imdb.arraySynopsis[0].text !== '' &&
-              movie.imdb.arraySynopsis[0].text.indexOf('It looks like') === -1
+                movie.imdb.arraySynopsis[0].text.indexOf('It looks like') === -1
             "
             class="row row-sub countdown-item-details"
           >
@@ -248,7 +248,7 @@
           <ul
             v-if="
               movie.imdb.locations.text.length > 0 &&
-              movie.imdb.locations.text !== ''
+                movie.imdb.locations.text !== ''
             "
             class="row row-sub countdown-item-details"
             style="
@@ -311,7 +311,7 @@
           <ul
             v-if="
               movie.imdb.arrayTaglines.length > 0 &&
-              movie.imdb.arrayTaglines[0].text !== ''
+                movie.imdb.arrayTaglines[0].text !== ''
             "
             class="row row-sub countdown-item-details"
             style="
@@ -521,15 +521,15 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       str:
         '<td class="release-date-item__attributes--empty" style="display: none;"></td>',
       videos: [],
-      count: 0,
+      count: 0
     };
   },
   computed: {
@@ -541,10 +541,10 @@ export default {
     },
     mainParam() {
       return this.$route.params.name;
-    },
+    }
   },
   watch: {
-    "$route.params.name": function () {
+    "$route.params.name": function() {
       const dataURL =
         this.$baseurl +
         "php-service/movie/" +
@@ -552,12 +552,12 @@ export default {
         "/page/" +
         this.$route.params.page +
         "/100/name/1";
-      this.$axios.get(dataURL).then((response) => {
+      this.$axios.get(dataURL).then(response => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
-    "$route.params.page": function () {
+    "$route.params.page": function() {
       const dataURL =
         this.$baseurl +
         "php-service/movie/" +
@@ -566,11 +566,11 @@ export default {
         this.$route.params.page +
         "/100/name/1";
 
-      this.$axios.get(dataURL).then((response) => {
+      this.$axios.get(dataURL).then(response => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
-    },
+    }
   },
   mounted() {
     // when the Vue app is booted up, this is run automatically.
@@ -583,7 +583,7 @@ export default {
       "/100/name/1";
     this.count = 1;
 
-    this.$axios.get(dataURL).then((response) => {
+    this.$axios.get(dataURL).then(response => {
       this.videos = response.data.result;
       this.count = response.data.count;
     });
@@ -595,11 +595,11 @@ export default {
     },
     catshashes(name) {
       let array = [];
-      this.videos.forEach((element) => {
+      this.videos.forEach(element => {
         const str = element.name;
         if (str === name) {
           let cats = element.imdb.genre.split(", ");
-          cats.forEach((cat) => {
+          cats.forEach(cat => {
             array.push(cat);
           });
         }
@@ -617,8 +617,8 @@ export default {
       url = url.substr(0, url.lastIndexOf("."));
 
       return url;
-    },
-  },
+    }
+  }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
