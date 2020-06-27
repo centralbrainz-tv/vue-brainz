@@ -10,7 +10,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "prettier/vue"
   ],
-  plugins: ["prettier", "vue", "eslint"],
+  plugins: ["prettier", "vue"],
   rules: {
     "vue/component-name-in-template-casing": ["error", "kebab-case"],
     "vue/no-v-html": "off",
