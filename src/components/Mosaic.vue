@@ -165,14 +165,14 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       videos: [],
       count: 0,
-      msg: "Biggest catalog of Horror Movies in the internet",
+      msg: "Biggest catalog of Horror Movies in the internet"
     };
   },
   computed: {
@@ -193,7 +193,7 @@ export default {
     },
     sortBy() {
       return this.$route.params.sort;
-    },
+    }
   },
   watch: {
     "$route.params.page": function () {
@@ -237,7 +237,7 @@ export default {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
-    },
+    }
   },
   mounted() {
     // when the Vue app is booted up, this is run automatically.
@@ -281,7 +281,7 @@ export default {
         }
       });
       return array.filter((item, index) => array.indexOf(item) === index);
-    },
-  },
+    }
+  }
 };
 </script>

@@ -22,7 +22,7 @@
         Object.defineProperty(n, r, {
           configurable: !1,
           enumerable: !0,
-          get: t,
+          get: t
         });
     }),
     (o.n = function (n) {

@@ -1,6 +1,8 @@
 <template>
   <div class="mainblock">
-    <h4 class="red">{{ message }}</h4>
+    <h4 class="red">
+      {{ message }}
+    </h4>
     <h5 class="red">{{ count }} results found</h5>
     <router-link
       class="view-select"
@@ -27,8 +29,8 @@
         <router-link
           :to="
             sortUrl +
-              '/year/' +
-              (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
+            '/year/' +
+            (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -38,8 +40,8 @@
         <router-link
           :to="
             sortUrl +
-              '/name/' +
-              (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
+            '/name/' +
+            (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -49,8 +51,8 @@
         <router-link
           :to="
             sortUrl +
-              '/count/' +
-              (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
+            '/count/' +
+            (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
@@ -60,13 +62,13 @@
         <router-link
           :to="
             sortUrl +
-              '/rating/' +
-              (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
+            '/rating/' +
+            (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
           "
         >
           {{
             "Rating " +
-              (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
+            (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
           }}
         </router-link>
       </div>
@@ -76,8 +78,9 @@
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
           :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
-          >{{ n }}&#32;</router-link
         >
+          {{ n }}&#32;
+        </router-link>
       </div>
       <hr class="red hr800" />
       <div
@@ -116,8 +119,8 @@
         <div
           v-if="
             movie.title !== null &&
-              movie.title !== undefined &&
-              movie.title !== ''
+            movie.title !== undefined &&
+            movie.title !== ''
           "
           lass="col-78 col-full-xs countdown-item-content"
         >
@@ -129,13 +132,14 @@
                     <router-link
                       :to="'/movie/' + movie.name + '/1'"
                       class="red"
-                      >{{ movie.titleYear }}</router-link
+                    >
+                      {{ movie.titleYear }} </router-link
                     >&nbsp;(
                     <router-link
                       :to="
                         '/year/' +
-                          movie.title.substring(1, movie.title.length - 1) +
-                          '/1/count/0'
+                        movie.title.substring(1, movie.title.length - 1) +
+                        '/1/count/0'
                       "
                       class="white"
                     >
@@ -203,7 +207,7 @@
                     :star-size="20"
                     border-color="red"
                     :read-only="true"
-                  ></star-rating>
+                  />
                 </div>
               </div>
             </div>
@@ -211,7 +215,7 @@
           <div
             v-if="
               movie.imdb.arrayPlotSummary.length > 0 &&
-                movie.imdb.arrayPlotSummary[0].text !== ''
+              movie.imdb.arrayPlotSummary[0].text !== ''
             "
             class="row row-sub countdown-item-details"
           >
@@ -227,8 +231,8 @@
                       ? summary.text
                       : ''
                   "
-                ></span>
-                <span class="pink" v-html="summary.author"></span>
+                />
+                <span class="pink" v-html="summary.author" />
               </p>
             </div>
           </div>
@@ -241,8 +245,9 @@
                   :key="cathash"
                   class="yellow"
                   :to="'/genre/' + cathash + '/1/count/1'"
-                  >#{{ cathash }}</router-link
                 >
+                  #{{ cathash }}
+                </router-link>
               </template>
             </div>
           </div>
@@ -256,8 +261,9 @@
           v-for="n in Math.ceil(count / 20.0)"
           :key="n"
           :to="'/genre/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
-          >{{ n }}&#32;</router-link
         >
+          {{ n }}&#32;
+        </router-link>
       </div>
       <hr class="red hr800" />
       <div class="brain-container">
@@ -273,9 +279,9 @@
 </template>
 
 <script>
-import Vue from "vue";
-import VueClipboard from "vue-clipboard2";
-Vue.use(VueClipboard);
+import Vue from "vue"
+import VueClipboard from "vue-clipboard2"
+Vue.use(VueClipboard)
 
 export default {
   name: "VideoCollection",
@@ -283,7 +289,7 @@ export default {
     options: {
       type: Object,
       default() {
-        return {};
+        return {}
       }
     }
   },
@@ -291,35 +297,35 @@ export default {
     return {
       videos: [],
       count: 0
-    };
+    }
   },
   computed: {
     message() {
-      return "Filtered by Genre: " + this.$route.params.genre;
+      return "Filtered by Genre: " + this.$route.params.genre
     },
     urlCalc() {
-      return window.location.href;
+      return window.location.href
     },
     mainParam() {
-      return this.$route.params.genre;
+      return this.$route.params.genre
     },
     sortUrl() {
       return (
         "/genre/" + this.$route.params.genre + "/" + this.$route.params.page
-      );
+      )
     },
     sortPage() {
-      return this.$route.params.page;
+      return this.$route.params.page
     },
     sortDesc() {
-      return this.$route.params.desc;
+      return this.$route.params.desc
     },
     sortBy() {
-      return this.$route.params.sort;
+      return this.$route.params.sort
     }
   },
   watch: {
-    "$route.params.genre": function() {
+    "$route.params.genre": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -329,13 +335,13 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
-        this.videos = response.data.result;
-        this.count = response.data.count;
-      });
+        this.sortDesc
+      this.$axios.get(dataURL).then((response) => {
+        this.videos = response.data.result
+        this.count = response.data.count
+      })
     },
-    "$route.params.page": function() {
+    "$route.params.page": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -345,13 +351,13 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
-        this.videos = response.data.result;
-        this.count = response.data.count;
-      });
+        this.sortDesc
+      this.$axios.get(dataURL).then((response) => {
+        this.videos = response.data.result
+        this.count = response.data.count
+      })
     },
-    "$route.params.sort": function() {
+    "$route.params.sort": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -361,13 +367,13 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
-        this.videos = response.data.result;
-        this.count = response.data.count;
-      });
+        this.sortDesc
+      this.$axios.get(dataURL).then((response) => {
+        this.videos = response.data.result
+        this.count = response.data.count
+      })
     },
-    "$route.params.desc": function() {
+    "$route.params.desc": function () {
       const dataURL =
         this.$baseurl +
         "php-service/genre/" +
@@ -377,11 +383,11 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc;
-      this.$axios.get(dataURL).then(response => {
-        this.videos = response.data.result;
-        this.count = response.data.count;
-      });
+        this.sortDesc
+      this.$axios.get(dataURL).then((response) => {
+        this.videos = response.data.result
+        this.count = response.data.count
+      })
     }
   },
   mounted() {
@@ -395,39 +401,39 @@ export default {
       "/20/" +
       this.sortBy +
       "/" +
-      this.sortDesc;
+      this.sortDesc
 
-    this.$axios.get(dataURL).then(response => {
-      this.videos = response.data.result;
-      this.count = response.data.count;
-    });
+    this.$axios.get(dataURL).then((response) => {
+      this.videos = response.data.result
+      this.count = response.data.count
+    })
   },
   methods: {
     catshashes(name) {
-      let array = [];
-      this.videos.forEach(element => {
-        const str = element.name;
+      let array = []
+      this.videos.forEach((element) => {
+        const str = element.name
         if (str === name) {
-          let cats = element.imdb.genre.split(", ");
-          cats.forEach(cat => {
-            array.push(cat);
-          });
+          let cats = element.imdb.genre.split(", ")
+          cats.forEach((cat) => {
+            array.push(cat)
+          })
         }
-      });
-      return array.filter((item, index) => array.indexOf(item) === index);
+      })
+      return array.filter((item, index) => array.indexOf(item) === index)
     },
     extension(url) {
       // Remove everything to the last slash in URL
-      url = url.substr(1 + url.lastIndexOf("/"));
+      url = url.substr(1 + url.lastIndexOf("/"))
       // Break URL at ? and take first part (file name, extension)
-      url = url.split("?")[0];
+      url = url.split("?")[0]
       // Sometimes URL doesn't have ? but #, so we should aslo do the same for #
-      url = url.split("#")[0];
+      url = url.split("#")[0]
       // Now we have only extension
-      url = url.substr(0, url.lastIndexOf("."));
+      url = url.substr(0, url.lastIndexOf("."))
 
-      return url;
+      return url
     }
   }
-};
+}
 </script>

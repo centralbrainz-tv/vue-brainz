@@ -5,14 +5,12 @@ module.exports = {
     browser: true
   },
   extends: [
-    "plugin:vue/base",
-    "plugin:vue/essential",
-    "plugin:vue/strongly-recommended",
     "plugin:vue/recommended",
     "eslint:recommended",
     "plugin:prettier/recommended",
     "prettier/vue"
   ],
+  plugins: ["prettier", "vue", "eslint"],
   rules: {
     "vue/component-name-in-template-casing": ["error", "kebab-case"],
     "vue/no-v-html": "off",

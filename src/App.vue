@@ -114,12 +114,12 @@
         :key="year"
         :to="
           '/year/' +
-            year.substr(1, year.length - 2) +
-            '/1/' +
-            sortBy +
-            '/' +
-            sortDesc +
-            ''
+          year.substr(1, year.length - 2) +
+          '/1/' +
+          sortBy +
+          '/' +
+          sortDesc +
+          ''
         "
         >&#183;&nbsp;{{ year.substr(1, year.length - 2) }}&#32;</router-link
       >
@@ -159,19 +159,19 @@ export default {
     const yearURL = this.$baseurl + "php-service/years/index/page/1/200/name/1";
     let self = this;
 
-    this.$axios.get(yearURL).then(function(response) {
+    this.$axios.get(yearURL).then(function (response) {
       self.years = response.data.result;
     });
   },
   methods: {
     sortByKey(array, key, reversed = 1) {
-      return array.sort(function(a, b) {
+      return array.sort(function (a, b) {
         var x = a["imdb"][key];
         var y = b["imdb"][key];
         return x < y ? 1 * reversed : x > y ? -1 * reversed : 0;
       });
     },
-    setRating: function(rating) {
+    setRating: function (rating) {
       this.$router.push("/rating/" + rating + "/1/rating/1");
     },
     clearData(url) {
@@ -181,7 +181,7 @@ export default {
     },
     catshashes(cats) {
       let array = [];
-      cats.split(", ").forEach(cat => {
+      cats.split(", ").forEach((cat) => {
         array.push(cat);
       });
       return array.filter((item, index) => array.indexOf(item) === index);
@@ -198,7 +198,7 @@ export default {
 
       return url;
     },
-    search: function(event) {
+    search: function (event) {
       this.data = [];
       if (this.query.length < 3) {
         return;
@@ -218,10 +218,10 @@ export default {
         "/page/1/20/name/1";
 
       let self = this;
-      this.$axios.get(dataURL).then(function(response) {
+      this.$axios.get(dataURL).then(function (response) {
         self.result = response.data.result;
 
-        self.result.forEach(element => {
+        self.result.forEach((element) => {
           let result = {
             keywords: "",
             name: "",
