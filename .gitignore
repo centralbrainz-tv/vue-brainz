@@ -15,3 +15,6 @@ dist/php-service/
 *.sln
 *.mp4
 *.icloud
+.json
+..bfg-report/
+*.jar
