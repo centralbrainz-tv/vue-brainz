@@ -279,9 +279,9 @@
 </template>
 
 <script>
-import Vue from "vue"
-import VueClipboard from "vue-clipboard2"
-Vue.use(VueClipboard)
+import Vue from "vue";
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
 
 export default {
   name: "VideoCollection",
@@ -289,7 +289,7 @@ export default {
     options: {
       type: Object,
       default() {
-        return {}
+        return {};
       }
     }
   },
@@ -297,31 +297,31 @@ export default {
     return {
       videos: [],
       count: 0
-    }
+    };
   },
   computed: {
     message() {
-      return "Filtered by Genre: " + this.$route.params.genre
+      return "Filtered by Genre: " + this.$route.params.genre;
     },
     urlCalc() {
-      return window.location.href
+      return window.location.href;
     },
     mainParam() {
-      return this.$route.params.genre
+      return this.$route.params.genre;
     },
     sortUrl() {
       return (
         "/genre/" + this.$route.params.genre + "/" + this.$route.params.page
-      )
+      );
     },
     sortPage() {
-      return this.$route.params.page
+      return this.$route.params.page;
     },
     sortDesc() {
-      return this.$route.params.desc
+      return this.$route.params.desc;
     },
     sortBy() {
-      return this.$route.params.sort
+      return this.$route.params.sort;
     }
   },
   watch: {
@@ -335,11 +335,11 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
-        this.videos = response.data.result
-        this.count = response.data.count
-      })
+        this.videos = response.data.result;
+        this.count = response.data.count;
+      });
     },
     "$route.params.page": function () {
       const dataURL =
@@ -351,11 +351,11 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
-        this.videos = response.data.result
-        this.count = response.data.count
-      })
+        this.videos = response.data.result;
+        this.count = response.data.count;
+      });
     },
     "$route.params.sort": function () {
       const dataURL =
@@ -367,11 +367,11 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
-        this.videos = response.data.result
-        this.count = response.data.count
-      })
+        this.videos = response.data.result;
+        this.count = response.data.count;
+      });
     },
     "$route.params.desc": function () {
       const dataURL =
@@ -383,11 +383,11 @@ export default {
         "/20/" +
         this.sortBy +
         "/" +
-        this.sortDesc
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
-        this.videos = response.data.result
-        this.count = response.data.count
-      })
+        this.videos = response.data.result;
+        this.count = response.data.count;
+      });
     }
   },
   mounted() {
@@ -401,39 +401,39 @@ export default {
       "/20/" +
       this.sortBy +
       "/" +
-      this.sortDesc
+      this.sortDesc;
 
     this.$axios.get(dataURL).then((response) => {
-      this.videos = response.data.result
-      this.count = response.data.count
-    })
+      this.videos = response.data.result;
+      this.count = response.data.count;
+    });
   },
   methods: {
     catshashes(name) {
-      let array = []
+      let array = [];
       this.videos.forEach((element) => {
-        const str = element.name
+        const str = element.name;
         if (str === name) {
-          let cats = element.imdb.genre.split(", ")
+          let cats = element.imdb.genre.split(", ");
           cats.forEach((cat) => {
-            array.push(cat)
-          })
+            array.push(cat);
+          });
         }
-      })
-      return array.filter((item, index) => array.indexOf(item) === index)
+      });
+      return array.filter((item, index) => array.indexOf(item) === index);
     },
     extension(url) {
       // Remove everything to the last slash in URL
-      url = url.substr(1 + url.lastIndexOf("/"))
+      url = url.substr(1 + url.lastIndexOf("/"));
       // Break URL at ? and take first part (file name, extension)
-      url = url.split("?")[0]
+      url = url.split("?")[0];
       // Sometimes URL doesn't have ? but #, so we should aslo do the same for #
-      url = url.split("#")[0]
+      url = url.split("#")[0];
       // Now we have only extension
-      url = url.substr(0, url.lastIndexOf("."))
+      url = url.substr(0, url.lastIndexOf("."));
 
-      return url
+      return url;
     }
   }
-}
+};
 </script>
