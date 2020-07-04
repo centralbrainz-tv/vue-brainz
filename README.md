@@ -26,6 +26,6 @@ yarn build
 * https://github.com/centralbrainz-tv/vue-brainz - Vue project.
 * https://github.com/centralbrainz-tv/php-service-tools - PHP service and supporting tools.
 ## License
-centralbrainz-tv/vue-brainz is licensed under the GNU General Public License v3.0.
+'centralbrainz-tv/vue-brainz' is licensed under the GNU General Public License v3.0.
 
 More information is here: https://www.gnu.org/licenses/gpl-3.0.en.html.
