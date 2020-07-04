@@ -7,6 +7,8 @@ Website is published to:
 * https://horror-movies.best - ALIAS mirror.
 ## Releases
 ### v1.0.0
+https://github.com/centralbrainz-tv/vue-brainz/releases/tag/1.0.0
+
 Simpliest Vue application with 3 pages:
 * Genre.vue - Filtered by specified genre classic view.
 * Movie.vue - Single movie page with more details and information.
@@ -14,6 +16,12 @@ Simpliest Vue application with 3 pages:
 * Rating.vue - Filtered by specified year classic view.
 * Search.vue - Search results classic view (filtered by search phrase).
 * Year.vue - Filtered by specified year classic view.
+### v1.1.0
+https://github.com/centralbrainz-tv/vue-brainz/releases/tag/1.1.0
+
+New mosaic grid view to project. Now can be selected along with classic view on main list. 
+* Mosaic.vue - Mosaic view page with list of movies.
+Mosaic view also becames the default view. 
 ## Build
 To build website with Vue and Webpack execute the following commands:
 ```bash
