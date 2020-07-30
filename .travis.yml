@@ -10,8 +10,10 @@ script: npm run build
 
 deploy:
  provider: pages
- token: $fc1a8f4b53cebfbe40021774164130ef6f6017c1
+ github_token: $GITHUB_TOKEN
  local_dir: dist
+ keep_history: true
+ skip_cleanup: true
  strategy: git
  on:
    branch: master
