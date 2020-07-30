@@ -1,14 +1,17 @@
 language: node_js
 node_js:
  - "node"
-
+dist: xenial
+os:
+ - linux
 cache: npm
 
 script: npm run build
 
 deploy:
  provider: pages
- github_token: $fc1a8f4b53cebfbe40021774164130ef6f6017c1
+ token: $fc1a8f4b53cebfbe40021774164130ef6f6017c1
  local_dir: dist
+ strategy: git
  on:
    branch: master
