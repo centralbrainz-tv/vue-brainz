@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /bench
+Disallow: /harjukatend
+Disallow: /php-service
+
+Sitemap: https://centralbrainz.tv/sitemap.xml
