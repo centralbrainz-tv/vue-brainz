@@ -54,7 +54,7 @@
       <a class="link" href="https://tenerife-trip.cc/">tenerife-trip.cc</a>
       &bull;
       <a class="link" href="https://travel-pics.vip/">travel-pics.vip</a> &bull;
-      &bull; <br />
+      <br />
       &bull;
       <a class="link" href="https://wheeloftheyear.page/">wheeloftheyear.page</a
       >&bull;<br />
