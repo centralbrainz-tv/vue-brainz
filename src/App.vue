@@ -57,7 +57,7 @@
       &bull; <br />
       &bull;
       <a class="link" href="https://wheeloftheyear.page/">wheeloftheyear.page</a
-      >&bull; >&bull; <br />
+      >&bull;<br />
     </div>
     <hr class="red hr800" />
     <br />
