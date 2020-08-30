@@ -7,18 +7,24 @@
     <hr class="red hr800" />
     <div class="links">
       &bull;
-      <a class="link" href="https://algaerium.info/">algaerium.info</a> &bull; <a class="link" href="https://antropology.tv/">antropology.tv</a> &bull; <a class="link" href="https://asmodeus.vip/">asmodeus.vip</a> &bull;
+      <a class="link" href="https://algaerium.info/">algaerium.info</a> &bull;
+      <a class="link" href="https://antropology.tv/">antropology.tv</a> &bull;
+      <a class="link" href="https://asmodeus.vip/">asmodeus.vip</a> &bull;
       <br />
       &bull;
       <a class="link" href="https://bettycat.vip/">bettycat.vip</a> &bull;
-      <a class="link" href="https://www.bibliothecium.info/">bibliothecium.info</a>
+      <a class="link" href="https://www.bibliothecium.info/"
+        >bibliothecium.info</a
+      >
       &bull;
       <a class="link" href="https://centralbrainz.tv/">centralbrainz.tv</a>
       &bull;
       <br />
       &bull;
       <a class="link" href="https://egypt-trip.cc/">egypt-trip.cc</a> &bull;
-      <a class="link" href="https://eldritch-horror.com/">eldritch-horror.com</a>
+      <a class="link" href="https://eldritch-horror.com/"
+        >eldritch-horror.com</a
+      >
       &bull;
       <a class="link" href="https://fungarium.info/">fungarium.info</a> &bull;
       <br />
@@ -29,14 +35,20 @@
       <a class="link" href="https://iceland-trip.cc/">iceland-trip.cc</a> &bull;
       <br />
       &bull;
-      <a class="link" href="https://karelia-trip.cc/">karelia-trip.cc</a> &bull; <a class="link" href="https://käpalised.com/">käpalised.com</a> &bull; <a class="link" href="https://lariushin.com/">lariushin.com</a> &bull;
+      <a class="link" href="https://karelia-trip.cc/">karelia-trip.cc</a> &bull;
+      <a class="link" href="https://käpalised.com/">käpalised.com</a> &bull;
+      <a class="link" href="https://lariushin.com/">lariushin.com</a> &bull;
       <br />
       &bull;
       <a class="link" href="https://lichenarium.info/">lichenarium.info</a>
-      <a class="link" href="https://melikian.vip/">melikian.vip</a> &bull; <a class="link" href="https://nightshade.blog/">nightshade.blog</a> &bull;
+      &bull;
+      <a class="link" href="https://melikian.vip/">melikian.vip</a> &bull;
+      <a class="link" href="https://nightshade.blog/">nightshade.blog</a> &bull;
       <br />
       &bull;
-      <a class="link" href="https://öland-saar.cc/">öland-saar.cc</a> &bull; <a class="link" href="https://plantarium.info/">plantarium.info</a> &bull; <a class="link" href="https://sciencebooks.cc/">sciencebooks.cc</a> &bull;
+      <a class="link" href="https://öland-saar.cc/">öland-saar.cc</a> &bull;
+      <a class="link" href="https://plantarium.info/">plantarium.info</a> &bull;
+      <a class="link" href="https://sciencebooks.cc/">sciencebooks.cc</a> &bull;
       <br />
       &bull;
       <a class="link" href="https://sochi-trip.cc/">sochi-trip.cc</a> &bull;
@@ -45,9 +57,10 @@
       <a class="link" href="https://travel-pics.vip/">travel-pics.vip</a> &bull;
       <br />
       &bull;
-      <a class="link" href="https://wheeloftheyear.page/">wheeloftheyear.page</a>
-      &bull;
-      <br />
+      <a class="link" href="https://wheeloftheyear.page/"
+        >wheeloftheyear.page</a
+      >
+      &bull; <br />
     </div>
     <hr class="red hr800" />
     <br />
@@ -60,7 +73,12 @@
       <br />
       <hr class="red hr800" />
       <br />
-      <div v-for="(value, index) in data" :key="index" :ref="`card_${index}`" class="values">
+      <div
+        v-for="(value, index) in data"
+        :key="index"
+        :ref="`card_${index}`"
+        class="values"
+      >
         <div class="div-img">
           <a :href="value.img_url" target="_blank">
             <img :src="value.img_url" class="thumb" />
@@ -68,22 +86,55 @@
         </div>
         <div class="div-value">
           <h5>
-            <a href="#" class="rot" @click="clearData(value.url + '/1')">{{ value.name }}</a>
+            <a href="#" class="rot" @click="clearData(value.url + '/1')">{{
+              value.name
+            }}</a>
           </h5>
           <h6 class="blue" v-html="value.description"></h6>
           <template v-for="cathash in catshashes(value.keywords)">
             &nbsp;
-            <a :key="cathash" href="#" class="yellow" @click="clearData('/genre/' + cathash + '/1/rating/1')">{{ cathash }}</a>
+            <a
+              :key="cathash"
+              href="#"
+              class="yellow"
+              @click="clearData('/genre/' + cathash + '/1/rating/1')"
+              >{{ cathash }}</a
+            >
           </template>
         </div>
       </div>
     </div>
     <br />
     <hr class="red hr800" />
-    <star-rating v-model="boundRating" :border-width="4" :star-size="20" :fixed-points="0" border-color="red" active-color="red" inactive-color="black" :increment="1" :rating="7" :max-rating="10" @rating-selected="setRating"></star-rating>
+    <star-rating
+      v-model="boundRating"
+      :border-width="4"
+      :star-size="20"
+      :fixed-points="0"
+      border-color="red"
+      active-color="red"
+      inactive-color="black"
+      :increment="1"
+      :rating="7"
+      :max-rating="10"
+      @rating-selected="setRating"
+    ></star-rating>
     <hr class="red hr800" />
     <div v-if="years && years.length > 0" style="display: block;">
-      <router-link v-for="year in years" :key="year" :to="'/year/' + year.substr(1, year.length - 2) + '/1/' + sortBy + '/' + sortDesc + ''">&#183;&nbsp;{{ year.substr(1, year.length - 2) }}&#32;</router-link>
+      <router-link
+        v-for="year in years"
+        :key="year"
+        :to="
+          '/year/' +
+          year.substr(1, year.length - 2) +
+          '/1/' +
+          sortBy +
+          '/' +
+          sortDesc +
+          ''
+        "
+        >&#183;&nbsp;{{ year.substr(1, year.length - 2) }}&#32;</router-link
+      >
     </div>
     <hr class="red hr800" />
     <router-view />
@@ -172,7 +223,11 @@ export default {
       }
 
       let results = [];
-      const dataURL = this.$baseurl + "php-service/search/" + this.query + "/page/1/20/name/1";
+      const dataURL =
+        this.$baseurl +
+        "php-service/search/" +
+        this.query +
+        "/page/1/20/name/1";
 
       let self = this;
       this.$axios.get(dataURL).then(function (response) {
@@ -189,9 +244,16 @@ export default {
 
           result.keywords = element.imdb.genre;
           result.name = element.name;
-          result.description = element.imdb.arrayPlotSummary[0].text.indexOf("It looks like") === -1 ? element.imdb.arrayPlotSummary[0].text : "";
+          result.description =
+            element.imdb.arrayPlotSummary[0].text.indexOf("It looks like") ===
+            -1
+              ? element.imdb.arrayPlotSummary[0].text
+              : "";
           result.url = encodeURI("/movie/" + element.name);
-          result.img_url = element.imdb.poster === "" ? "/static/default.png" : element.imdb.poster;
+          result.img_url =
+            element.imdb.poster === ""
+              ? "/static/default.png"
+              : element.imdb.poster;
           results.push(result);
         });
         self.data = results;

@@ -2,10 +2,16 @@
   <div class="mainblock">
     <h4 class="red">{{ message }}</h4>
     <h5 class="red">{{ count }} results found</h5>
-    <router-link class="view-select" :to="'/mosaic/' + sortPage + '/' + sortBy + '/' + sortDesc">
+    <router-link
+      class="view-select"
+      :to="'/mosaic/' + sortPage + '/' + sortBy + '/' + sortDesc"
+    >
       Mosaic
     </router-link>
-    <router-link class="view-select" :to="'/index/' + sortPage + '/' + sortBy + '/' + sortDesc">
+    <router-link
+      class="view-select"
+      :to="'/index/' + sortPage + '/' + sortBy + '/' + sortDesc"
+    >
       Classic
     </router-link>
     <div v-if="videos && videos.length > 0" class="white left-align data">
@@ -18,47 +24,149 @@
         {{ sortBy + (sortDesc === "1" ? " descending" : " ascending") }}
         <br />
         <span class="red">Sort By:</span>
-        <router-link :to="sortUrl + '/year/' + (sortBy === 'year' && sortDesc === '1' ? '0' : '1')"> {{ "Year " + (sortBy === "year" && sortDesc === "1" ? "desc" : "asc") }} </router-link>&nbsp;|&nbsp;
-        <router-link :to="sortUrl + '/name/' + (sortBy === 'name' && sortDesc === '1' ? '0' : '1')"> {{ "Name " + (sortBy === "name" && sortDesc === "1" ? "desc" : "asc") }} </router-link>&nbsp;|&nbsp;
-        <router-link :to="sortUrl + '/count/' + (sortBy === 'count' && sortDesc === '1' ? '0' : '1')"> {{ "Count " + (sortBy === "count" && sortDesc === "1" ? "desc" : "asc") }} </router-link>&nbsp;|&nbsp;
-        <router-link :to="sortUrl + '/rating/' + (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')">
-          {{ "Rating " + (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc") }}
+        <router-link
+          :to="
+            sortUrl +
+            '/year/' +
+            (sortBy === 'year' && sortDesc === '1' ? '0' : '1')
+          "
+        >
+          {{
+            "Year " + (sortBy === "year" && sortDesc === "1" ? "desc" : "asc")
+          }} </router-link
+        >&nbsp;|&nbsp;
+        <router-link
+          :to="
+            sortUrl +
+            '/name/' +
+            (sortBy === 'name' && sortDesc === '1' ? '0' : '1')
+          "
+        >
+          {{
+            "Name " + (sortBy === "name" && sortDesc === "1" ? "desc" : "asc")
+          }} </router-link
+        >&nbsp;|&nbsp;
+        <router-link
+          :to="
+            sortUrl +
+            '/count/' +
+            (sortBy === 'count' && sortDesc === '1' ? '0' : '1')
+          "
+        >
+          {{
+            "Count " + (sortBy === "count" && sortDesc === "1" ? "desc" : "asc")
+          }} </router-link
+        >&nbsp;|&nbsp;
+        <router-link
+          :to="
+            sortUrl +
+            '/rating/' +
+            (sortBy === 'rating' && sortDesc === '1' ? '0' : '1')
+          "
+        >
+          {{
+            "Rating " +
+            (sortBy === "rating" && sortDesc === "1" ? "desc" : "asc")
+          }}
         </router-link>
       </div>
       <hr class="red hr800" />
       <div v-if="count > 0" class="pages">
-        <router-link v-for="n in Math.ceil(count / 20.0)" :key="n" :to="'/rating/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{ n }}&#32;</router-link>
+        <router-link
+          v-for="n in Math.ceil(count / 20.0)"
+          :key="n"
+          :to="'/rating/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
+          >{{ n }}&#32;</router-link
+        >
       </div>
       <hr class="red hr800" />
-      <div v-for="movie in videos" :key="movie.name" class="row countdown-item" style="padding-left: 10px; width: 100%;">
+      <div
+        v-for="movie in videos"
+        :key="movie.name"
+        class="row countdown-item"
+        style="padding-left: 10px; width: 100%;"
+      >
         <div class="col-sm-3 col-full-xs img-thumb">
-          <router-link :to="movie.imdb !== null && movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" class="article_movie_poster">
+          <router-link
+            :to="
+              movie.imdb !== null &&
+              movie.imdb !== undefined &&
+              movie.imdb.poster !== ''
+                ? movie.imdb.poster
+                : '/static/default.png'
+            "
+            class="article_movie_poster"
+          >
             <div>
-              <img class="article_poster thumb-img" width="210" height="auto" :src="movie.imdb !== undefined && movie.imdb.poster !== '' ? movie.imdb.poster : '/static/default.png'" alt sborder />
+              <img
+                class="article_poster thumb-img"
+                width="210"
+                height="auto"
+                :src="
+                  movie.imdb !== undefined && movie.imdb.poster !== ''
+                    ? movie.imdb.poster
+                    : '/static/default.png'
+                "
+                alt
+                sborder
+              />
             </div>
           </router-link>
         </div>
-        <div v-if="movie.title !== null && movie.title !== undefined && movie.title !== ''" lass="col-78 col-full-xs countdown-item-content">
+        <div
+          v-if="
+            movie.title !== null &&
+            movie.title !== undefined &&
+            movie.title !== ''
+          "
+          lass="col-78 col-full-xs countdown-item-content"
+        >
           <div class="row row-sub countdown-item-title-bar">
             <div class="col-full-xs" style="height: 100%;">
               <div class="article_movie_title" style="float: left;">
                 <div>
                   <h2>
-                    <router-link :to="'/movie/' + movie.name + '/1'" class="red">{{ movie.titleYear }}</router-link
-                    >&nbsp;( <router-link :to="'/year/' + movie.title.substring(1, movie.title.length - 1) + '/1/count/0'" class="white"> {{ movie.title.substring(1, movie.title.length - 1) }} </router-link>)
+                    <router-link
+                      :to="'/movie/' + movie.name + '/1'"
+                      class="red"
+                      >{{ movie.titleYear }}</router-link
+                    >&nbsp;(
+                    <router-link
+                      :to="
+                        '/year/' +
+                        movie.title.substring(1, movie.title.length - 1) +
+                        '/1/count/0'
+                      "
+                      class="white"
+                    >
+                      {{
+                        movie.title.substring(1, movie.title.length - 1)
+                      }} </router-link
+                    >)
                   </h2>
-                  <span v-if="movie.rottenTomato" class="red">Tomato Meter:</span>
-                  <h5 v-if="movie.rottenTomato" class="white">{{ movie.rottenTomato.tomatoMeter.score }}% / {{ movie.rottenTomato.tomatoMeter.count }} total</h5>
+                  <span v-if="movie.rottenTomato" class="red"
+                    >Tomato Meter:</span
+                  >
+                  <h5 v-if="movie.rottenTomato" class="white">
+                    {{ movie.rottenTomato.tomatoMeter.score }}% /
+                    {{ movie.rottenTomato.tomatoMeter.count }} total
+                  </h5>
                 </div>
               </div>
             </div>
           </div>
-          <div v-if="movie.rottenTomato" class="row row-sub countdown-item-title-bar">
+          <div
+            v-if="movie.rottenTomato"
+            class="row row-sub countdown-item-title-bar"
+          >
             <div class="col-full-xs" style="height: 100%;">
               <div class="article_movie_title" style="float: left;">
                 <div>
                   <span class="red">Audience Score:</span>
-                  <h5 class="white">{{ movie.rottenTomato.audienceScore.score }}% / {{ movie.rottenTomato.audienceScore.count }} ratings</h5>
+                  <h5 class="white">
+                    {{ movie.rottenTomato.audienceScore.score }}% /
+                    {{ movie.rottenTomato.audienceScore.count }} ratings
+                  </h5>
                 </div>
               </div>
             </div>
@@ -100,11 +208,26 @@
               </div>
             </div>
           </div>
-          <div v-if="movie.imdb.arrayPlotSummary.length > 0 && movie.imdb.arrayPlotSummary[0].text !== ''" class="row row-sub countdown-item-details">
+          <div
+            v-if="
+              movie.imdb.arrayPlotSummary.length > 0 &&
+              movie.imdb.arrayPlotSummary[0].text !== ''
+            "
+            class="row row-sub countdown-item-details"
+          >
             <div>
               <span class="red">Summaries:</span>
-              <p v-for="(summary, index) in movie.imdb.arrayPlotSummary" :key="index">
-                <span v-html="summary.text.indexOf('It looks like') === -1 ? summary.text : ''"></span>
+              <p
+                v-for="(summary, index) in movie.imdb.arrayPlotSummary"
+                :key="index"
+              >
+                <span
+                  v-html="
+                    summary.text.indexOf('It looks like') === -1
+                      ? summary.text
+                      : ''
+                  "
+                ></span>
                 <span class="pink" v-html="summary.author"></span>
               </p>
             </div>
@@ -114,7 +237,12 @@
               <span class="red">Genre:</span>
               <template v-for="cathash in catshashes(movie.name)">
                 &nbsp;
-                <router-link :key="cathash" class="yellow" :to="'/genre/' + cathash + '/1/count/1'">#{{ cathash }}</router-link>
+                <router-link
+                  :key="cathash"
+                  class="yellow"
+                  :to="'/genre/' + cathash + '/1/count/1'"
+                  >#{{ cathash }}</router-link
+                >
               </template>
             </div>
           </div>
@@ -124,11 +252,21 @@
       <br />
       <hr class="red hr800" />
       <div v-if="count > 0" class="pages">
-        <router-link v-for="n in Math.ceil(count / 20.0)" :key="n" :to="'/rating/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc">{{ n }}&#32;</router-link>
+        <router-link
+          v-for="n in Math.ceil(count / 20.0)"
+          :key="n"
+          :to="'/rating/' + mainParam + '/' + n + '/' + sortBy + '/' + sortDesc"
+          >{{ n }}&#32;</router-link
+        >
       </div>
       <hr class="red hr800" />
       <div class="brain-container">
-        <img class="flip" width="320" height="auto" src="/static/centralbrainz.png" />
+        <img
+          class="flip"
+          width="320"
+          height="auto"
+          src="/static/centralbrainz.png"
+        />
       </div>
     </div>
   </div>
@@ -167,7 +305,9 @@ export default {
       return this.$route.params.rating;
     },
     sortUrl() {
-      return "/rating/" + this.$route.params.rating + "/" + this.$route.params.page;
+      return (
+        "/rating/" + this.$route.params.rating + "/" + this.$route.params.page
+      );
     },
     sortPage() {
       return this.$route.params.page;
@@ -181,28 +321,64 @@ export default {
   },
   watch: {
     "$route.params.rating": function () {
-      const dataURL = this.$baseurl + "php-service/rating/" + this.$route.params.rating + "/page/" + this.$route.params.page + "/20/" + this.sortBy + "/" + this.sortDesc;
+      const dataURL =
+        this.$baseurl +
+        "php-service/rating/" +
+        this.$route.params.rating +
+        "/page/" +
+        this.$route.params.page +
+        "/20/" +
+        this.sortBy +
+        "/" +
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
     "$route.params.page": function () {
-      const dataURL = this.$baseurl + "php-service/rating/" + this.$route.params.rating + "/page/" + this.$route.params.page + "/20/" + this.sortBy + "/" + this.sortDesc;
+      const dataURL =
+        this.$baseurl +
+        "php-service/rating/" +
+        this.$route.params.rating +
+        "/page/" +
+        this.$route.params.page +
+        "/20/" +
+        this.sortBy +
+        "/" +
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
     "$route.params.sort": function () {
-      const dataURL = this.$baseurl + "php-service/rating/" + this.$route.params.rating + "/page/" + this.$route.params.page + "/20/" + this.sortBy + "/" + this.sortDesc;
+      const dataURL =
+        this.$baseurl +
+        "php-service/rating/" +
+        this.$route.params.rating +
+        "/page/" +
+        this.$route.params.page +
+        "/20/" +
+        this.sortBy +
+        "/" +
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
       });
     },
     "$route.params.desc": function () {
-      const dataURL = this.$baseurl + "php-service/rating/" + this.$route.params.rating + "/page/" + this.$route.params.page + "/20/" + this.sortBy + "/" + this.sortDesc;
+      const dataURL =
+        this.$baseurl +
+        "php-service/rating/" +
+        this.$route.params.rating +
+        "/page/" +
+        this.$route.params.page +
+        "/20/" +
+        this.sortBy +
+        "/" +
+        this.sortDesc;
       this.$axios.get(dataURL).then((response) => {
         this.videos = response.data.result;
         this.count = response.data.count;
@@ -211,7 +387,16 @@ export default {
   },
   mounted() {
     // when the Vue app is booted up, this is run automatically.
-    const dataURL = this.$baseurl + "php-service/rating/" + this.$route.params.rating + "/page/" + this.$route.params.page + "/20/" + this.sortBy + "/" + this.sortDesc;
+    const dataURL =
+      this.$baseurl +
+      "php-service/rating/" +
+      this.$route.params.rating +
+      "/page/" +
+      this.$route.params.page +
+      "/20/" +
+      this.sortBy +
+      "/" +
+      this.sortDesc;
     this.$axios.get(dataURL).then((response) => {
       this.videos = response.data.result;
       this.count = response.data.count;
