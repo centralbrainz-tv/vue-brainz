@@ -87,16 +87,7 @@
               movie.imdb.rating
             }}</a>
           </div>
-          <router-link
-            :to="
-              movie.imdb !== null &&
-              movie.imdb !== undefined &&
-              movie.imdb.poster !== ''
-                ? movie.imdb.poster
-                : '/static/default.png'
-            "
-            class="article_movie_poster"
-          >
+          <router-link :to="'/movie/' + movie.name + '/1'">
             <img
               class="article_poster thumb-movie-img"
               width="210"
