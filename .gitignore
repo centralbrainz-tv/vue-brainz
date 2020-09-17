@@ -6,6 +6,7 @@ yarn-error.log*
 dist/harjukatend/
 dist/bench/
 dist/php-service/
+out.json
 # Editor directories and files
 .idea
 .vscode
