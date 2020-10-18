@@ -87,7 +87,7 @@
         v-for="movie in videos"
         :key="movie.name"
         class="row countdown-item"
-        style="padding-left: 10px; width: 100%;"
+        style="padding-left: 10px; width: 100%"
       >
         <div class="col-sm-3 col-full-xs img-thumb">
           <router-link
@@ -125,8 +125,8 @@
           lass="col-78 col-full-xs countdown-item-content"
         >
           <div class="row row-sub countdown-item-title-bar">
-            <div class="col-full-xs" style="height: 100%;">
-              <div class="article_movie_title" style="float: left;">
+            <div class="col-full-xs" style="height: 100%">
+              <div class="article_movie_title" style="float: left">
                 <div>
                   <h2>
                     <router-link
@@ -163,8 +163,8 @@
             v-if="movie.rottenTomato"
             class="row row-sub countdown-item-title-bar"
           >
-            <div class="col-full-xs" style="height: 100%;">
-              <div class="article_movie_title" style="float: left;">
+            <div class="col-full-xs" style="height: 100%">
+              <div class="article_movie_title" style="float: left">
                 <div>
                   <span class="red">Audience Score:</span>
                   <h5 class="white">
@@ -176,8 +176,8 @@
             </div>
           </div>
           <div class="row row-sub countdown-item-title-bar">
-            <div class="col-full-xs" style="height: 100%;">
-              <div class="article_movie_title" style="float: left;">
+            <div class="col-full-xs" style="height: 100%">
+              <div class="article_movie_title" style="float: left">
                 <div>
                   <span class="red">IMDB Rating:</span>
                   <h5 class="white">
@@ -192,8 +192,8 @@
             </div>
           </div>
           <div class="row row-sub countdown-item-title-bar">
-            <div class="col-full-xs" style="height: 100%;">
-              <div class="article_movie_title" style="float: left;">
+            <div class="col-full-xs" style="height: 100%">
+              <div class="article_movie_title" style="float: left">
                 <div>
                   <span class="red">Aggregate median rating:</span>
                   <star-rating
