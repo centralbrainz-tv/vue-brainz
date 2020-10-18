@@ -19,3 +19,4 @@ out.json
 .json
 ..bfg-report/
 *.jar
+out.json
