@@ -120,7 +120,7 @@
       @rating-selected="setRating"
     ></star-rating>
     <hr class="red hr800" />
-    <div v-if="years && years.length > 0" style="display: block;">
+    <div v-if="years && years.length > 0" style="display: block">
       <router-link
         v-for="year in years"
         :key="year"
